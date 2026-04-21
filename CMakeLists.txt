@@ -8,7 +8,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 option(NANO_USE_CUDA "Enable CUDA buffer path" ON)
 
 add_library(nano_mooncake_core
-    src/engine.cpp
+    csrc/nano_mooncake/engine.cpp
 )
 
 target_include_directories(nano_mooncake_core
@@ -23,8 +23,22 @@ endif()
 # Python binding is optional at configure time.
 option(NANO_BUILD_PYTHON "Build pybind module" OFF)
 if(NANO_BUILD_PYTHON)
+    find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+
+    # If pybind11 is installed by pip, this makes CMake find pybind11Config.cmake
+    # without requiring callers to manually pass -Dpybind11_DIR.
+    execute_process(
+        COMMAND "${Python_EXECUTABLE}" -m pybind11 --cmakedir
+        OUTPUT_VARIABLE _pybind11_dir
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_QUIET
+    )
+    if(_pybind11_dir)
+        list(APPEND CMAKE_PREFIX_PATH "${_pybind11_dir}")
+    endif()
     find_package(pybind11 REQUIRED)
-    pybind11_add_module(_nano_mooncake src/python/bindings.cpp)
+    pybind11_add_module(_nano_mooncake csrc/python/bindings.cpp)
     target_link_libraries(_nano_mooncake PRIVATE nano_mooncake_core)
     target_include_directories(_nano_mooncake PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    install(TARGETS _nano_mooncake LIBRARY DESTINATION nano_mooncake)
 endif()

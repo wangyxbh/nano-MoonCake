@@ -1,0 +1,1570 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/sbin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/sbin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    searched_directories:
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/bin/uname"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/sbin/uname"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/uname"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/bin/uname"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/sbin/uname"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/uname"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/uname"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/uname"
+      - "/home/wangyxbh/.local/bin/uname"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/uname"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/uname"
+      - "/home/wangyxbh/miniconda3/condabin/uname"
+      - "/usr/local/cuda/bin/uname"
+      - "/opt/openmpi-4.1.7/bin/uname"
+      - "/usr/local/sbin/uname"
+      - "/usr/local/bin/uname"
+      - "/usr/sbin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 5.15.0-141-generic - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "/usr/bin/g++"
+    candidate_directories:
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/sbin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/sbin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/g++"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:468 (find_file)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:506 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/"
+    found: "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/g++ -pthread;-B;/home/wangyxbh/miniconda3/envs/washing/compiler_compat
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/4.3.1/CompilerIdCXX/a.out
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/ar"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/ranlib"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/strip"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/ld"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/nm"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/objdump"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/objcopy"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/readelf"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    searched_directories:
+      - "/usr/bin/dlltool"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/dlltool"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/dlltool"
+      - "/home/wangyxbh/.local/bin/dlltool"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/dlltool"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/dlltool"
+      - "/home/wangyxbh/miniconda3/condabin/dlltool"
+      - "/usr/local/cuda/bin/dlltool"
+      - "/opt/openmpi-4.1.7/bin/dlltool"
+      - "/usr/local/sbin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/sbin/dlltool"
+      - "/bin/dlltool"
+      - "/usr/games/dlltool"
+      - "/usr/local/games/dlltool"
+      - "/snap/bin/dlltool"
+    found: false
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    found: "/usr/bin/addr2line"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    searched_directories:
+      - "/usr/bin/tapi"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/tapi"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/tapi"
+      - "/home/wangyxbh/.local/bin/tapi"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/tapi"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/tapi"
+      - "/home/wangyxbh/miniconda3/condabin/tapi"
+      - "/usr/local/cuda/bin/tapi"
+      - "/opt/openmpi-4.1.7/bin/tapi"
+      - "/usr/local/sbin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/bin/tapi"
+      - "/usr/games/tapi"
+      - "/usr/local/games/tapi"
+      - "/snap/bin/tapi"
+    found: false
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-11.4"
+      - "gcc-ar-11"
+      - "gcc-ar11"
+      - "gcc-ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    searched_directories:
+      - "/usr/bin/gcc-ar-11.4"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/gcc-ar-11.4"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/gcc-ar-11.4"
+      - "/home/wangyxbh/.local/bin/gcc-ar-11.4"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/gcc-ar-11.4"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/gcc-ar-11.4"
+      - "/home/wangyxbh/miniconda3/condabin/gcc-ar-11.4"
+      - "/usr/local/cuda/bin/gcc-ar-11.4"
+      - "/opt/openmpi-4.1.7/bin/gcc-ar-11.4"
+      - "/usr/local/sbin/gcc-ar-11.4"
+      - "/usr/local/bin/gcc-ar-11.4"
+      - "/usr/sbin/gcc-ar-11.4"
+      - "/sbin/gcc-ar-11.4"
+      - "/bin/gcc-ar-11.4"
+      - "/usr/games/gcc-ar-11.4"
+      - "/usr/local/games/gcc-ar-11.4"
+      - "/snap/bin/gcc-ar-11.4"
+    found: "/usr/bin/gcc-ar-11"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-11.4"
+      - "gcc-ranlib-11"
+      - "gcc-ranlib11"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/"
+      - "/home/wangyxbh/.local/bin/"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/"
+      - "/home/wangyxbh/miniconda3/condabin/"
+      - "/usr/local/cuda/bin/"
+      - "/opt/openmpi-4.1.7/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    searched_directories:
+      - "/usr/bin/gcc-ranlib-11.4"
+      - "/tmp/pip-build-env-87gsafdb/overlay/bin/gcc-ranlib-11.4"
+      - "/tmp/pip-build-env-87gsafdb/normal/bin/gcc-ranlib-11.4"
+      - "/home/wangyxbh/.local/bin/gcc-ranlib-11.4"
+      - "/usr/mpi/gcc/openmpi-4.1.7a1/bin/gcc-ranlib-11.4"
+      - "/home/wangyxbh/miniconda3/envs/washing/bin/gcc-ranlib-11.4"
+      - "/home/wangyxbh/miniconda3/condabin/gcc-ranlib-11.4"
+      - "/usr/local/cuda/bin/gcc-ranlib-11.4"
+      - "/opt/openmpi-4.1.7/bin/gcc-ranlib-11.4"
+      - "/usr/local/sbin/gcc-ranlib-11.4"
+      - "/usr/local/bin/gcc-ranlib-11.4"
+      - "/usr/sbin/gcc-ranlib-11.4"
+      - "/sbin/gcc-ranlib-11.4"
+      - "/bin/gcc-ranlib-11.4"
+      - "/usr/games/gcc-ranlib-11.4"
+      - "/usr/local/games/gcc-ranlib-11.4"
+      - "/snap/bin/gcc-ranlib-11.4"
+    found: "/usr/bin/gcc-ranlib-11"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-y4NTMr"
+      binary: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-y4NTMr"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-y4NTMr'
+        
+        Run Build Command(s): /home/wangyxbh/miniconda3/envs/washing/bin/ninja -v cmTC_05a68
+        [1/2] /usr/bin/g++  -pthread -B /home/wangyxbh/miniconda3/envs/washing/compiler_compat   -v -o CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -c /tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_05a68.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE -D_REENTRANT /tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_05a68.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc7MtgUX.s
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/local/cuda/include
+         /opt/openmpi-4.1.7/include
+         /usr/include/c++/11
+         /usr/include/x86_64-linux-gnu/c++/11
+         /usr/include/c++/11/backward
+         /usr/lib/gcc/x86_64-linux-gnu/11/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f
+        COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_05a68.dir/'
+         as -v --64 -o CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc7MtgUX.s
+        GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/local/cuda/lib64/../lib/:/opt/openmpi-4.1.7/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/local/cuda/lib64/:/opt/openmpi-4.1.7/lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] : && /usr/bin/g++  -pthread -B /home/wangyxbh/miniconda3/envs/washing/compiler_compat  -v -Wl,-v CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_05a68   && :
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/g++
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/local/cuda/lib64/../lib/:/opt/openmpi-4.1.7/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/local/cuda/lib64/:/opt/openmpi-4.1.7/lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'cmTC_05a68' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_05a68.'
+         /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccshiEsQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_05a68 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/home/wangyxbh/miniconda3/envs/washing/compiler_compat -L/usr/local/cuda/lib64/../lib -L/opt/openmpi-4.1.7/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/local/cuda/lib64 -L/opt/openmpi-4.1.7/lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. -v CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o
+        collect2 version 11.4.0
+        /home/wangyxbh/miniconda3/envs/washing/compiler_compat/ld -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccshiEsQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_05a68 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/home/wangyxbh/miniconda3/envs/washing/compiler_compat -L/usr/local/cuda/lib64/../lib -L/opt/openmpi-4.1.7/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/local/cuda/lib64 -L/opt/openmpi-4.1.7/lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. -v CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o
+        GNU ld (Anaconda binutils) 2.40
+        COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'cmTC_05a68' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_05a68.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/local/cuda/include]
+          add: [/opt/openmpi-4.1.7/include]
+          add: [/usr/include/c++/11]
+          add: [/usr/include/x86_64-linux-gnu/c++/11]
+          add: [/usr/include/c++/11/backward]
+          add: [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/local/cuda/include] ==> [/usr/local/cuda/include]
+        collapse include dir [/opt/openmpi-4.1.7/include] ==> [/opt/openmpi-4.1.7/include]
+        collapse include dir [/usr/include/c++/11] ==> [/usr/include/c++/11]
+        collapse include dir [/usr/include/x86_64-linux-gnu/c++/11] ==> [/usr/include/x86_64-linux-gnu/c++/11]
+        collapse include dir [/usr/include/c++/11/backward] ==> [/usr/include/c++/11/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/11/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/local/cuda/include;/opt/openmpi-4.1.7/include;/usr/include/c++/11;/usr/include/x86_64-linux-gnu/c++/11;/usr/include/c++/11/backward;/usr/lib/gcc/x86_64-linux-gnu/11/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-y4NTMr']
+        ignore line: []
+        ignore line: [Run Build Command(s): /home/wangyxbh/miniconda3/envs/washing/bin/ninja -v cmTC_05a68]
+        ignore line: [[1/2] /usr/bin/g++  -pthread -B /home/wangyxbh/miniconda3/envs/washing/compiler_compat   -v -o CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -c /tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_05a68.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE -D_REENTRANT /tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_05a68.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc7MtgUX.s]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/local/cuda/include]
+        ignore line: [ /opt/openmpi-4.1.7/include]
+        ignore line: [ /usr/include/c++/11]
+        ignore line: [ /usr/include/x86_64-linux-gnu/c++/11]
+        ignore line: [ /usr/include/c++/11/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f]
+        ignore line: [COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_05a68.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc7MtgUX.s]
+        ignore line: [GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/local/cuda/lib64/../lib/:/opt/openmpi-4.1.7/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/local/cuda/lib64/:/opt/openmpi-4.1.7/lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] : && /usr/bin/g++  -pthread -B /home/wangyxbh/miniconda3/envs/washing/compiler_compat  -v -Wl -v CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_05a68   && :]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/home/wangyxbh/miniconda3/envs/washing/compiler_compat/:/usr/local/cuda/lib64/../lib/:/opt/openmpi-4.1.7/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/local/cuda/lib64/:/opt/openmpi-4.1.7/lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-pthread' '-B' '/home/wangyxbh/miniconda3/envs/washing/compiler_compat' '-v' '-o' 'cmTC_05a68' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_05a68.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccshiEsQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_05a68 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/home/wangyxbh/miniconda3/envs/washing/compiler_compat -L/usr/local/cuda/lib64/../lib -L/opt/openmpi-4.1.7/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/local/cuda/lib64 -L/opt/openmpi-4.1.7/lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. -v CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccshiEsQ.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_05a68] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o]
+          arg [-L/home/wangyxbh/miniconda3/envs/washing/compiler_compat] ==> dir [/home/wangyxbh/miniconda3/envs/washing/compiler_compat]
+          arg [-L/usr/local/cuda/lib64/../lib] ==> dir [/usr/local/cuda/lib64/../lib]
+          arg [-L/opt/openmpi-4.1.7/lib/../lib] ==> dir [/opt/openmpi-4.1.7/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/local/cuda/lib64] ==> dir [/usr/local/cuda/lib64]
+          arg [-L/opt/openmpi-4.1.7/lib] ==> dir [/opt/openmpi-4.1.7/lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+        ignore line: [collect2 version 11.4.0]
+        ignore line: [/home/wangyxbh/miniconda3/envs/washing/compiler_compat/ld -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccshiEsQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_05a68 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/home/wangyxbh/miniconda3/envs/washing/compiler_compat -L/usr/local/cuda/lib64/../lib -L/opt/openmpi-4.1.7/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/local/cuda/lib64 -L/opt/openmpi-4.1.7/lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. -v CMakeFiles/cmTC_05a68.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+        linker tool for 'CXX': /home/wangyxbh/miniconda3/envs/washing/compiler_compat/ld
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/home/wangyxbh/miniconda3/envs/washing/compiler_compat] ==> [/home/wangyxbh/miniconda3/envs/washing/compiler_compat]
+        collapse library dir [/usr/local/cuda/lib64/../lib] ==> [/usr/local/cuda/lib]
+        collapse library dir [/opt/openmpi-4.1.7/lib/../lib] ==> [/opt/openmpi-4.1.7/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11] ==> [/usr/lib/gcc/x86_64-linux-gnu/11]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/local/cuda/lib64] ==> [/usr/local/cuda/lib64]
+        collapse library dir [/opt/openmpi-4.1.7/lib] ==> [/opt/openmpi-4.1.7/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;pthread;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/home/wangyxbh/miniconda3/envs/washing/compiler_compat;/usr/local/cuda/lib;/opt/openmpi-4.1.7/lib;/usr/lib/gcc/x86_64-linux-gnu/11;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib;/usr/local/cuda/lib64]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/home/wangyxbh/miniconda3/envs/washing/compiler_compat/ld" "-v"
+      GNU ld (Anaconda binutils) 2.40
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/share/cmake-4.3/Modules/CheckCXXCompilerFlag.cmake:103 (cmake_check_compiler_flag)"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/share/cmake/pybind11/pybind11Common.cmake:332 (check_cxx_compiler_flag)"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/share/cmake/pybind11/pybind11Common.cmake:377 (_pybind11_return_if_cxx_and_linker_flags_work)"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/share/cmake/pybind11/pybind11Common.cmake:438 (_pybind11_generate_lto)"
+      - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/share/cmake/pybind11/pybind11Config.cmake:257 (include)"
+      - "CMakeLists.txt:39 (find_package)"
+    checks:
+      - "Performing Test HAS_FLTO_AUTO"
+    directories:
+      source: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-tAaXZH"
+      binary: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-tAaXZH"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "HAS_FLTO_AUTO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-tAaXZH'
+        
+        Run Build Command(s): /home/wangyxbh/miniconda3/envs/washing/bin/ninja -v cmTC_e380e
+        [1/2] /usr/bin/g++  -pthread -B /home/wangyxbh/miniconda3/envs/washing/compiler_compat -DHAS_FLTO_AUTO  -std=gnu++17 -fPIE   -flto=auto -fno-fat-lto-objects -o CMakeFiles/cmTC_e380e.dir/src.cxx.o -c /home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/CMakeScratch/TryCompile-tAaXZH/src.cxx
+        [2/2] : && /usr/bin/g++  -pthread -B /home/wangyxbh/miniconda3/envs/washing/compiler_compat   CMakeFiles/cmTC_e380e.dir/src.cxx.o -o cmTC_e380e  -flto=auto && :
+        
+      exitCode: 0
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:39 (find_package)"
+    name: "pybind11"
+    configs:
+      -
+        filename: "pybind11.cps"
+        kind: "cps"
+      -
+        filename: "pybind11Config.cmake"
+        kind: "cmake"
+      -
+        filename: "pybind11-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "pybind11"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/pkgRedirects/pybind11Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/pkgRedirects/pybind11-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/pkgRedirects/lib/x86_64-linux-gnu/cps/pybind11.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/pkgRedirects/lib/cps/pybind11.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/pkgRedirects/share/cps/pybind11.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/cmake/pybind11Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/cmake/pybind11-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11-3.0.4.dist-info/pybind11Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11-3.0.4.dist-info/pybind11-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/pybind11Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/pybind11-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/lib/x86_64-linux-gnu/cps/pybind11.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/lib/cps/pybind11.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/share/cps/pybind11.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages/pybind11/share/cmake/pybind11/pybind11Config.cmake"
+      mode: "config"
+      version: "3.0.4"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/wangyxbh/miniconda3/envs/washing/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages"
+        - "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/pybind11/share/cmake/pybind11"
+      ENV{PATH}:
+        - "/tmp/pip-build-env-87gsafdb/overlay/bin"
+        - "/tmp/pip-build-env-87gsafdb/normal/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/mpi/gcc/openmpi-4.1.7a1/bin"
+        - "/home/wangyxbh/miniconda3/envs/washing/bin"
+        - "/home/wangyxbh/miniconda3/condabin"
+        - "/usr/local/cuda/bin"
+        - "/opt/openmpi-4.1.7/bin"
+        - "/home/wangyxbh/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/tmp/tmpz6tbbkda/wheel/platlib"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data"
+        - "/tmp/tmpz6tbbkda/wheel/platlib"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+...

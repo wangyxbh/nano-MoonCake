@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -flto=auto -shared  -o _nano_mooncake.cpython-312-x86_64-linux-gnu.so CMakeFiles/_nano_mooncake.dir/csrc/python/bindings.cpp.o  libnano_mooncake_core.a

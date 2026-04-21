@@ -1,0 +1,8 @@
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/nano_mooncake_core.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/_nano_mooncake.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/edit_cache.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/rebuild_cache.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/list_install_components.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/install.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/install/local.dir
+/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64/CMakeFiles/install/strip.dir

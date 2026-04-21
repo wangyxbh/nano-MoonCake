@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnano_mooncake_core.a CMakeFiles/nano_mooncake_core.dir/csrc/nano_mooncake/engine.cpp.o
+/usr/bin/ranlib libnano_mooncake_core.a

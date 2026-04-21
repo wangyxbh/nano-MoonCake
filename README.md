@@ -10,8 +10,9 @@ nano-MoonCake/
   include/
     nano_mooncake/
       engine.h
-  src/
-    engine.cpp
+  csrc/
+    nano_mooncake/
+      engine.cpp
     python/
       bindings.cpp
   python/
@@ -27,3 +28,15 @@ nano-MoonCake/
 - C++: implement `Engine::init/send/recv/close` with TCP first.
 - CUDA: add device buffer handling (start with copy-to-host strategy).
 - Python: expose stable API through pybind + thin wrapper.
+
+## Editable Install
+
+```bash
+pip install -e .
+```
+
+After installation:
+
+```bash
+python examples/tcp_cuda_demo.py
+```

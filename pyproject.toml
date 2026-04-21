@@ -1,0 +1,21 @@
+[build-system]
+requires = [
+  "scikit-build-core>=0.10",
+  "pybind11>=2.11",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "nano-mooncake"
+version = "0.1.0"
+description = "Minimal learning scaffold inspired by Mooncake transfer engine"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[tool.scikit-build]
+cmake.version = ">=3.16"
+build-dir = "build/{wheel_tag}"
+wheel.packages = ["python/nano_mooncake"]
+
+[tool.scikit-build.cmake.define]
+NANO_BUILD_PYTHON = "ON"

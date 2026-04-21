@@ -1,0 +1,9 @@
+# ninja log v7
+0	653	1776755703007124294	CMakeFiles/nano_mooncake_core.dir/csrc/nano_mooncake/engine.cpp.o	e55d5e9a82dded06
+653	663	1776755703659125075	libnano_mooncake_core.a	f7775d51d4435d58
+0	3900	1776755703007124294	CMakeFiles/_nano_mooncake.dir/csrc/python/bindings.cpp.o	228e2cae2719d807
+3901	4896	1776755706907128970	_nano_mooncake.cpython-312-x86_64-linux-gnu.so	6e22bf51e67a00e2
+1	652	1776755723235148670	CMakeFiles/nano_mooncake_core.dir/csrc/nano_mooncake/engine.cpp.o	e2d57fbd6fbe2383
+652	659	1776755723883149456	libnano_mooncake_core.a	4f94bafe0b01cc6a
+1	3918	1776755723235148670	CMakeFiles/_nano_mooncake.dir/csrc/python/bindings.cpp.o	66918b6eb17d8189
+3918	4922	1776755727151153424	_nano_mooncake.cpython-312-x86_64-linux-gnu.so	ce0bffa2353e536e
