@@ -1,8 +1,0 @@
-{
-  "source_dir": "/home/wangyxbh/nano-MoonCake",
-  "build_dir": "/home/wangyxbh/nano-MoonCake/build/cp312-cp312-linux_x86_64",
-  "cmake_path": "/tmp/pip-build-env-87gsafdb/normal/lib/python3.12/site-packages/cmake/data/bin/cmake",
-  "skbuild_path": "/tmp/pip-build-env-87gsafdb/overlay/lib/python3.12/site-packages/scikit_build_core",
-  "skbuild_version": "0.12.2",
-  "python_executable": "/home/wangyxbh/miniconda3/envs/washing/bin/python3.12"
-}

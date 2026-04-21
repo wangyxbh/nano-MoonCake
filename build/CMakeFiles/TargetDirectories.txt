@@ -1,4 +1,0 @@
-/home/wangyxbh/nano-MoonCake/build/CMakeFiles/nano_mooncake_core.dir
-/home/wangyxbh/nano-MoonCake/build/CMakeFiles/_nano_mooncake.dir
-/home/wangyxbh/nano-MoonCake/build/CMakeFiles/edit_cache.dir
-/home/wangyxbh/nano-MoonCake/build/CMakeFiles/rebuild_cache.dir

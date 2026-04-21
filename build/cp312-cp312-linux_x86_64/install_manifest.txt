@@ -1,1 +1,0 @@
-/tmp/tmpz6tbbkda/wheel/platlib/nano_mooncake/_nano_mooncake.cpython-312-x86_64-linux-gnu.so
