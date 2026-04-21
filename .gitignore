@@ -1,0 +1,48 @@
+# Build artifacts
+/build/
+/cmake-build-*/
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg-info/
+.eggs/
+/dist/
+/wheelhouse/
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
+/.coverage
+coverage.xml
+
+# pip/scikit-build editable install caches
+_skbuild/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE/editor caches
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
