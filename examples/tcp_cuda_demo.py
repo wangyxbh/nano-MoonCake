@@ -27,8 +27,8 @@ def main() -> None:
     size = len(host_buf)
 
     try:
-        print("[1/6] init")
-        engine.init("local://demo")
+        print("[1/6] start")
+        engine.start("local://demo")
 
         print("[2/6] register_buffer")
         local = engine.register_buffer(addr, size, "cpu:0", True)
@@ -58,14 +58,14 @@ def main() -> None:
                 f"msg={waited.message} code={waited.error_code}"
             )
 
-        print("[6/6] close")
-        engine.close()
-        print("PASS: init/register/open/submit/poll/wait/close all succeeded.")
+        print("[6/6] stop")
+        engine.stop()
+        print("PASS: start/register/open/submit/poll/wait/stop all succeeded.")
     except Exception:
         print("FAIL: runtime error in demo flow")
         print(traceback.format_exc())
         try:
-            engine.close()
+            engine.stop()
         except Exception:
             pass
 

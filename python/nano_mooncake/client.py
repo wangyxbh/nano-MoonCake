@@ -4,8 +4,12 @@ class NanoMooncakeClient:
     def __init__(self, engine):
         self._engine = engine
 
+    def start(self, local_addr: str) -> None:
+        self._engine.start(local_addr)
+
     def init(self, local_addr: str) -> None:
-        self._engine.init(local_addr)
+        # Backward-compatible alias for older call sites.
+        self.start(local_addr)
 
     def register_buffer(
         self,
@@ -33,5 +37,9 @@ class NanoMooncakeClient:
     def wait(self, batch_id: int, timeout_ms: int = -1):
         return self._engine.wait(batch_id, timeout_ms)
 
+    def stop(self) -> None:
+        self._engine.stop()
+
     def close(self) -> None:
-        self._engine.close()
+        # Backward-compatible alias for older call sites.
+        self.stop()

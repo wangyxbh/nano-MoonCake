@@ -10,6 +10,10 @@ namespace {
 constexpr int kTimeoutError = 1;
 }
 
+void Engine::start(const std::string& local_addr) { init(local_addr); }
+
+void Engine::stop() { close(); }
+
 void Engine::init(const std::string& local_addr) {
   if (local_addr.empty()) {
     throw std::invalid_argument("local_addr must not be empty");

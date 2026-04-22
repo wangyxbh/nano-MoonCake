@@ -56,6 +56,7 @@ PYBIND11_MODULE(_nano_mooncake, m) {
 
   py::class_<nano_mooncake::Engine>(m, "Engine")
       .def(py::init<>())
+      .def("start", &nano_mooncake::Engine::start, py::arg("local_addr"))
       .def("init", &nano_mooncake::Engine::init, py::arg("local_addr"))
       .def(
           "register_buffer",
@@ -81,5 +82,6 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def("poll", &nano_mooncake::Engine::poll, py::arg("batch_id"))
       .def("wait", &nano_mooncake::Engine::wait, py::arg("batch_id"),
            py::arg("timeout_ms") = -1)
+      .def("stop", &nano_mooncake::Engine::stop)
       .def("close", &nano_mooncake::Engine::close);
 }
