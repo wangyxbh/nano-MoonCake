@@ -17,9 +17,14 @@ class NanoMooncakeClient:
         bytes_len: int,
         location: str = "any",
         remote_accessible: bool = True,
+        device=None,
     ):
+        if device is None:
+            return self._engine.register_buffer(
+                addr, bytes_len, location, remote_accessible
+            )
         return self._engine.register_buffer(
-            addr, bytes_len, location, remote_accessible
+            addr, bytes_len, location, remote_accessible, device
         )
 
     def open_segment(self, segment_name: str):

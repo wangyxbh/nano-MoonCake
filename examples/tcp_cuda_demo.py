@@ -1,4 +1,5 @@
 import ctypes
+import os
 import traceback
 
 
@@ -30,8 +31,12 @@ def main() -> None:
         print("[1/6] start")
         engine.start("local://demo")
 
-        print("[2/6] register_buffer")
-        local = engine.register_buffer(addr, size, "cpu:0", True)
+        use_cuda = os.getenv("NANO_USE_CUDA_BUFFER", "0") == "1"
+        device = nm.DeviceType.CUDA if use_cuda else nm.DeviceType.CPU
+        location = "cuda:0" if use_cuda else "cpu:0"
+
+        print(f"[2/6] register_buffer (device={device}, location={location})")
+        local = engine.register_buffer(addr, size, location, True, device)
         print(f"  local.buffer_id={local.buffer_id}, size={size}")
 
         print("[3/6] open_segment")

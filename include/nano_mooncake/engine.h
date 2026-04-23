@@ -1,11 +1,15 @@
 #pragma once
 
+#include <cstddef>
+#include <cstdint>
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
+#include "transport.h"
 #include "types.h"
 
 namespace nano_mooncake {
@@ -24,7 +28,9 @@ class Engine {
   RegisteredBuffer register_buffer(
       const BufferView& buffer, const std::string& location = "any",
       bool remote_accessible = true);
+  void unregister_buffer(BufferId buffer_id);
   RemoteSegmentHandle open_segment(const std::string& segment_name);
+  void close_segment(SegmentId segment_id);
   BatchHandle allocate_batch(std::size_t capacity);
 
   BatchHandle submit_write(BufferId local_buffer_id, const RemoteBufferRef& remote);
@@ -52,6 +58,7 @@ class Engine {
   std::unordered_map<std::string, SegmentId> segment_name_to_id_;
   std::unordered_map<BatchId, BatchRecord> batch_table_;
   std::unordered_set<void*> raw_addr_registry_;
+  std::unique_ptr<TransportBackend> transportbackend;
   BufferId next_buffer_id_ = 1;
   SegmentId next_segment_id_ = 1;
   BatchId next_batch_id_ = 1;

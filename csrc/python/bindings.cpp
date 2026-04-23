@@ -26,7 +26,11 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def(py::init<>())
       .def_readwrite("segment_id", &nano_mooncake::RemoteSegmentHandle::segment_id)
       .def_readwrite("segment_name",
-                     &nano_mooncake::RemoteSegmentHandle::segment_name);
+                     &nano_mooncake::RemoteSegmentHandle::segment_name)
+      .def_readwrite("peer_endpoint",
+                     &nano_mooncake::RemoteSegmentHandle::peer_endpoint)
+      .def_readwrite("remote_base_addr",
+                     &nano_mooncake::RemoteSegmentHandle::remote_base_addr);
 
   py::class_<nano_mooncake::RemoteBufferRef>(m, "RemoteBufferRef")
       .def(py::init<>())
@@ -61,16 +65,18 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def(
           "register_buffer",
           [](nano_mooncake::Engine& self, std::uintptr_t addr, std::size_t bytes,
-             const std::string& location, bool remote_accessible) {
+             const std::string& location, bool remote_accessible,
+             nano_mooncake::DeviceType device) {
             nano_mooncake::BufferView view{
                 .data = reinterpret_cast<void*>(addr),
                 .bytes = bytes,
-                .device = nano_mooncake::DeviceType::kCPU,
+                .device = device,
             };
             return self.register_buffer(view, location, remote_accessible);
           },
           py::arg("addr"), py::arg("bytes"), py::arg("location") = "any",
-          py::arg("remote_accessible") = true)
+          py::arg("remote_accessible") = true,
+          py::arg("device") = nano_mooncake::DeviceType::kCPU)
       .def("open_segment", &nano_mooncake::Engine::open_segment,
            py::arg("segment_name"))
       .def("allocate_batch", &nano_mooncake::Engine::allocate_batch,

@@ -31,6 +31,9 @@ struct RegisteredBuffer {
 struct RemoteSegmentHandle {
   SegmentId segment_id = 0;
   std::string segment_name;
+  // Resolved metadata for transport backend fast path.
+  std::string peer_endpoint;
+  std::uint64_t remote_base_addr = 0;
 };
 
 struct RemoteBufferRef {
@@ -72,6 +75,8 @@ struct ResolvedTransferRequest {
   BufferId local_buffer_id = 0;
   BufferView local_view;
   RemoteBufferRef remote;
+  std::string peer_endpoint;
+  std::uint64_t resolved_remote_addr = 0;
   std::size_t length = 0;
 };
 
