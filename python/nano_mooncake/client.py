@@ -27,8 +27,16 @@ class NanoMooncakeClient:
             addr, bytes_len, location, remote_accessible, device
         )
 
-    def open_segment(self, segment_name: str):
-        return self._engine.open_segment(segment_name)
+    def mount_segment(
+        self, segment_name: str, buffer_id: int, transport_endpoint: str = ""
+    ):
+        return self._engine.mount_segment(segment_name, buffer_id, transport_endpoint)
+
+    def unmount_segment(self, segment_name: str):
+        return self._engine.unmount_segment(segment_name)
+
+    def open_segment(self, segment_name: str, transport_endpoint: str = ""):
+        return self._engine.open_segment(segment_name, transport_endpoint)
 
     def submit_write(self, local_buffer_id: int, remote):
         return self._engine.submit_write(local_buffer_id, remote)

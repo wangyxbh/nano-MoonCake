@@ -16,7 +16,7 @@ namespace nano_mooncake {
 
 class Engine {
  public:
-  Engine() = default;
+  Engine();
   ~Engine() = default;
 
   // Preferred lifecycle API (aligned with TransportBackend start/stop).
@@ -29,15 +29,22 @@ class Engine {
       const BufferView& buffer, const std::string& location = "any",
       bool remote_accessible = true);
   void unregister_buffer(BufferId buffer_id);
-  RemoteSegmentHandle open_segment(const std::string& segment_name);
+  MountedSegment mount_segment(
+      const std::string& segment_name, 
+      BufferId buffer_id,
+      const std::string& transport_endpoint = "");
+  void unmount_segment(const std::string& segment_name);
+  RemoteSegmentHandle open_segment(
+      const std::string& segment_name,
+      const std::string& transport_endpoint = "");
   void close_segment(SegmentId segment_id);
   BatchHandle allocate_batch(std::size_t capacity);
 
   BatchHandle submit_write(BufferId local_buffer_id, const RemoteBufferRef& remote);
   BatchHandle submit_read(const RemoteBufferRef& remote, BufferId local_buffer_id);
 
-  TransferStatus poll(BatchId batch_id) const;
-  TransferStatus wait(BatchId batch_id, int timeout_ms = -1) const;
+  TransferStatus poll(BatchId batch_id);
+  TransferStatus wait(BatchId batch_id, int timeout_ms = -1);
   void close();
 
  private:
@@ -54,6 +61,7 @@ class Engine {
   std::string local_addr_;
   bool initialized_ = false;
   std::unordered_map<BufferId, RegisteredBuffer> buffer_registry_;
+  std::unordered_map<std::string, MountedSegment> mounted_segments_;
   std::unordered_map<SegmentId, RemoteSegmentHandle> segment_cache_;
   std::unordered_map<std::string, SegmentId> segment_name_to_id_;
   std::unordered_map<BatchId, BatchRecord> batch_table_;

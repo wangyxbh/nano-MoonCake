@@ -28,12 +28,21 @@ struct RegisteredBuffer {
   bool remote_accessible = true;
 };
 
+struct MountedSegment {
+  std::string segment_name;
+  BufferId buffer_id = 0;
+  std::string transport_endpoint;
+  std::uint64_t base_offset = 0;
+  std::size_t bytes = 0;
+};
+
 struct RemoteSegmentHandle {
   SegmentId segment_id = 0;
   std::string segment_name;
   // Resolved metadata for transport backend fast path.
   std::string peer_endpoint;
   std::uint64_t remote_base_addr = 0;
+  std::size_t remote_bytes = 0;
 };
 
 struct RemoteBufferRef {

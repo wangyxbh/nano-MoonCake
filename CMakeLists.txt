@@ -9,6 +9,8 @@ option(NANO_USE_CUDA "Enable CUDA buffer path" ON)
 
 add_library(nano_mooncake_core
     csrc/nano_mooncake/engine.cpp
+    csrc/nano_mooncake/transport.cpp
+    csrc/nano_mooncake/tcp_transport.cpp
 )
 
 target_include_directories(nano_mooncake_core

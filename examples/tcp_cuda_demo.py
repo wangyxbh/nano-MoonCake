@@ -28,28 +28,35 @@ def main() -> None:
     size = len(host_buf)
 
     try:
-        print("[1/6] start")
-        engine.start("local://demo")
+        print("[1/7] start")
+        engine.start("tcp://127.0.0.1:19001")
 
         use_cuda = os.getenv("NANO_USE_CUDA_BUFFER", "0") == "1"
         device = nm.DeviceType.CUDA if use_cuda else nm.DeviceType.CPU
         location = "cuda:0" if use_cuda else "cpu:0"
 
-        print(f"[2/6] register_buffer (device={device}, location={location})")
+        print(f"[2/7] register_buffer (device={device}, location={location})")
         local = engine.register_buffer(addr, size, location, True, device)
         print(f"  local.buffer_id={local.buffer_id}, size={size}")
 
-        print("[3/6] open_segment")
-        seg = engine.open_segment("peer-demo-segment")
+        print("[3/7] mount_segment")
+        mounted = engine.mount_segment("demo-segment", local.buffer_id)
+        print(
+            f"  mounted.segment_name={mounted.segment_name}, "
+            f"endpoint={mounted.transport_endpoint}"
+        )
+
+        print("[4/7] open_segment")
+        seg = engine.open_segment("demo-segment", mounted.transport_endpoint)
         print(f"  segment_id={seg.segment_id}, name={seg.segment_name}")
 
-        print("[4/6] build remote ref")
+        print("[5/7] build remote ref")
         remote = nm.RemoteBufferRef()
         remote.segment = seg
         remote.offset = 0
         remote.length = size
 
-        print("[5/6] submit_write + poll/wait")
+        print("[6/7] submit_write + poll/wait")
         batch = engine.submit_write(local.buffer_id, remote)
         polled = engine.poll(batch.batch_id)
         waited = engine.wait(batch.batch_id, 1000)
@@ -63,9 +70,11 @@ def main() -> None:
                 f"msg={waited.message} code={waited.error_code}"
             )
 
-        print("[6/6] stop")
+        print("[7/7] stop")
         engine.stop()
-        print("PASS: start/register/open/submit/poll/wait/stop all succeeded.")
+        print(
+            "PASS: start/register/mount/open/submit/poll/wait/stop all succeeded."
+        )
     except Exception:
         print("FAIL: runtime error in demo flow")
         print(traceback.format_exc())

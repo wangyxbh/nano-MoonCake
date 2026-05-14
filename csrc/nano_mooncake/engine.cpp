@@ -1,14 +1,18 @@
 #include "nano_mooncake/engine.h"
 
 #include <chrono>
-#include <thread>
 #include <stdexcept>
+#include <thread>
+
+#include "nano_mooncake/tcp_transport.h"
 
 namespace nano_mooncake {
 
 namespace {
 constexpr int kTimeoutError = 1;
 }
+
+Engine::Engine() : transportbackend(std::make_unique<TcpTransportBackend>()) {}
 
 void Engine::start(const std::string& local_addr) { init(local_addr); }
 
@@ -65,6 +69,12 @@ void Engine::unregister_buffer(BufferId buffer_id) {
   if (it == buffer_registry_.end()) {
     throw std::invalid_argument("buffer_id not found");
   }
+  for (const auto& [segment_name, segment] : mounted_segments_) {
+    if (segment.buffer_id == buffer_id) {
+      throw std::invalid_argument(
+          "buffer is still mounted as segment " + segment_name);
+    }
+  }
   if (transportbackend) {
     transportbackend->remove_local_buffer(buffer_id);
   }
@@ -72,13 +82,65 @@ void Engine::unregister_buffer(BufferId buffer_id) {
   buffer_registry_.erase(it);
 }
 
-RemoteSegmentHandle Engine::open_segment(const std::string& segment_name) {
+MountedSegment Engine::mount_segment(const std::string& segment_name,
+                                     BufferId buffer_id,
+                                     const std::string& transport_endpoint) {
   if (!initialized_) {
     throw std::runtime_error("Engine is not initialized");
   }
   if (segment_name.empty()) {
     throw std::invalid_argument("segment_name must not be empty");
   }
+  auto buffer_it = buffer_registry_.find(buffer_id);
+  if (buffer_it == buffer_registry_.end()) {
+    throw std::invalid_argument("buffer_id not found");
+  }
+  if (!buffer_it->second.remote_accessible) {
+    throw std::invalid_argument("buffer is not remote accessible");
+  }
+  if (mounted_segments_.find(segment_name) != mounted_segments_.end()) {
+    throw std::invalid_argument("segment_name already mounted locally");
+  }
+
+  MountedSegment mounted{
+      .segment_name = segment_name,
+      .buffer_id = buffer_id,
+      .transport_endpoint =
+          transport_endpoint.empty() ? local_addr_ : transport_endpoint,
+      .base_offset = 0,
+      .bytes = buffer_it->second.view.bytes,
+  };
+  mounted_segments_.emplace(segment_name, mounted);
+  if (transportbackend) {
+    transportbackend->add_local_segment(mounted);
+  }
+  return mounted;
+}
+
+void Engine::unmount_segment(const std::string& segment_name) {
+  if (!initialized_) {
+    throw std::runtime_error("Engine is not initialized");
+  }
+  auto it = mounted_segments_.find(segment_name);
+  if (it == mounted_segments_.end()) {
+    throw std::invalid_argument("segment_name is not mounted locally");
+  }
+  if (transportbackend) {
+    transportbackend->remove_local_segment(segment_name);
+  }
+  mounted_segments_.erase(it);
+}
+
+RemoteSegmentHandle Engine::open_segment(const std::string& segment_name,
+                                         const std::string& transport_endpoint) {
+  if (!initialized_) {
+    throw std::runtime_error("Engine is not initialized");
+  }
+  if (segment_name.empty()) {
+    throw std::invalid_argument("segment_name must not be empty");
+  }
+  const std::string endpoint =
+      transport_endpoint.empty() ? segment_name : transport_endpoint;
   if (auto it = segment_name_to_id_.find(segment_name);
       it != segment_name_to_id_.end()) {
     return segment_cache_.at(it->second);
@@ -86,14 +148,16 @@ RemoteSegmentHandle Engine::open_segment(const std::string& segment_name) {
   RemoteSegmentHandle handle{
       .segment_id = next_segment_id_++,
       .segment_name = segment_name,
-      .peer_endpoint = segment_name,
+      .peer_endpoint = endpoint,
       .remote_base_addr = 0,
+      .remote_bytes = 0,
   };
-  segment_name_to_id_[segment_name] = handle.segment_id;
-  segment_cache_[handle.segment_id] = handle;
+  // Let the backend resolve remote metadata up front so submit() can stay simple.
   if (transportbackend) {
     transportbackend->prepare_segment(handle);
   }
+  segment_name_to_id_[segment_name] = handle.segment_id;
+  segment_cache_[handle.segment_id] = handle;
   return handle;
 }
 
@@ -160,15 +224,18 @@ BatchHandle Engine::submit_read(const RemoteBufferRef& remote,
   return submit_request(request);
 }
 
-TransferStatus Engine::poll(BatchId batch_id) const {
-  auto status = get_batch_status(batch_id);
-  if (!status.has_value()) {
+TransferStatus Engine::poll(BatchId batch_id) {
+  auto it = batch_table_.find(batch_id);
+  if (it == batch_table_.end()) {
     throw std::invalid_argument("batch_id not found");
   }
-  return status.value();
+  if (transportbackend) {
+    it->second.status = transportbackend->poll(batch_id);
+  }
+  return it->second.status;
 }
 
-TransferStatus Engine::wait(BatchId batch_id, int timeout_ms) const {
+TransferStatus Engine::wait(BatchId batch_id, int timeout_ms) {
   auto start = std::chrono::steady_clock::now();
   while (true) {
     auto status = poll(batch_id);
@@ -204,6 +271,15 @@ void Engine::close() {
   }
   for (auto segment_id : segments_to_close) {
     close_segment(segment_id);
+  }
+
+  std::vector<std::string> mounted_names;
+  mounted_names.reserve(mounted_segments_.size());
+  for (const auto& [segment_name, _] : mounted_segments_) {
+    mounted_names.push_back(segment_name);
+  }
+  for (const auto& segment_name : mounted_names) {
+    unmount_segment(segment_name);
   }
 
   std::vector<BufferId> buffers_to_unregister;
@@ -252,6 +328,11 @@ BatchHandle Engine::submit_request(const TransferRequest& request) {
   if (segment_it == segment_cache_.end()) {
     throw std::invalid_argument("remote segment is not opened");
   }
+  if (segment_it->second.remote_bytes > 0 &&
+      (request.remote.offset > segment_it->second.remote_bytes ||
+       request.length > segment_it->second.remote_bytes - request.remote.offset)) {
+    throw std::invalid_argument("request exceeds remote segment length");
+  }
 
   ResolvedTransferRequest resolved{
       .request_id = request.request_id,
@@ -273,11 +354,8 @@ BatchHandle Engine::submit_request(const TransferRequest& request) {
 
   if (transportbackend) {
     transportbackend->submit(handle.batch_id, {resolved});
-  } else {
-    record.status.state = TransferState::kCompleted;
-    record.status.transferred_bytes = request.length;
-    record.status.message = "completed by stage-0 stub";
   }
+  record.status = poll(handle.batch_id);
   return handle;
 }
 
