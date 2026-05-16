@@ -1,15 +1,14 @@
 class NanoMooncakeClient:
-    """Stage-0 wrapper for transfer-engine style API."""
+    """Minimal client wrapper for nano-MoonCake control and data planes."""
 
     def __init__(self, engine):
         self._engine = engine
 
-    def start(self, local_addr: str) -> None:
-        self._engine.start(local_addr)
+    def start(self, local_addr: str, master_addr: str, client_id: str) -> None:
+        self._engine.start(local_addr, master_addr, client_id)
 
-    def init(self, local_addr: str) -> None:
-        # Backward-compatible alias for older call sites.
-        self.start(local_addr)
+    def init(self, local_addr: str, master_addr: str, client_id: str) -> None:
+        self.start(local_addr, master_addr, client_id)
 
     def register_buffer(
         self,
@@ -35,14 +34,28 @@ class NanoMooncakeClient:
     def unmount_segment(self, segment_name: str):
         return self._engine.unmount_segment(segment_name)
 
-    def open_segment(self, segment_name: str, transport_endpoint: str = ""):
-        return self._engine.open_segment(segment_name, transport_endpoint)
+    def resolve_segment(self, segment_name: str):
+        return self._engine.resolve_segment(segment_name)
+
+    def put_object(
+        self, key: str, segment_name: str, offset: int, length: int
+    ) -> None:
+        self._engine.put_object(key, segment_name, offset, length)
+
+    def get_object(self, key: str):
+        return self._engine.get_object(key)
+
+    def open_segment(self, segment_name: str):
+        return self._engine.open_segment(segment_name)
 
     def submit_write(self, local_buffer_id: int, remote):
         return self._engine.submit_write(local_buffer_id, remote)
 
     def submit_read(self, remote, local_buffer_id: int):
         return self._engine.submit_read(remote, local_buffer_id)
+
+    def read_object(self, key: str, local_buffer_id: int):
+        return self._engine.read_object(key, local_buffer_id)
 
     def poll(self, batch_id: int):
         return self._engine.poll(batch_id)

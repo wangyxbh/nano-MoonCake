@@ -9,6 +9,10 @@ option(NANO_USE_CUDA "Enable CUDA buffer path" ON)
 
 add_library(nano_mooncake_core
     csrc/nano_mooncake/engine.cpp
+    csrc/nano_mooncake/master_client.cpp
+    csrc/nano_mooncake/master_protocol.cpp
+    csrc/nano_mooncake/master_server.cpp
+    csrc/nano_mooncake/mooncake_master.cpp
     csrc/nano_mooncake/transport.cpp
     csrc/nano_mooncake/tcp_transport.cpp
 )
@@ -44,3 +48,7 @@ if(NANO_BUILD_PYTHON)
     target_include_directories(_nano_mooncake PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
     install(TARGETS _nano_mooncake LIBRARY DESTINATION nano_mooncake)
 endif()
+
+add_executable(mooncake_master csrc/nano_mooncake/master_main.cpp)
+target_link_libraries(mooncake_master PRIVATE nano_mooncake_core)
+target_include_directories(mooncake_master PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

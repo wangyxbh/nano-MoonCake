@@ -1,5 +1,6 @@
+import argparse
 import ctypes
-import os
+import time
 import traceback
 
 
@@ -10,78 +11,87 @@ def _status_name(status_obj) -> str:
     return name
 
 
-def main() -> None:
-    try:
-        from nano_mooncake import _nano_mooncake as nm
-    except Exception:
-        print("FAIL: cannot import _nano_mooncake")
-        print("Hint: build with -DNANO_BUILD_PYTHON=ON and set PYTHONPATH.")
-        print(traceback.format_exc())
-        return
+def _import_nm():
+    from nano_mooncake import _nano_mooncake as nm
 
-    print("== nano-MoonCake stage0 minimal demo ==")
+    return nm
+
+
+def run_provider(args) -> None:
+    nm = _import_nm()
     engine = nm.Engine()
+    payload = bytearray(args.payload.encode("utf-8"))
+    addr = ctypes.addressof(ctypes.c_char.from_buffer(payload))
 
-    # Use bytearray so we can get a stable writable pointer.
-    host_buf = bytearray(b"hello-mooncake-stage0")
-    addr = ctypes.addressof(ctypes.c_char.from_buffer(host_buf))
-    size = len(host_buf)
+    engine.start(args.local_addr, args.master_addr, args.client_id)
+    local = engine.register_buffer(addr, len(payload), "cpu:0", True, nm.DeviceType.CPU)
+    mounted = engine.mount_segment(args.segment_name, local.buffer_id)
+    engine.put_object(args.key, mounted.segment_name, 0, len(payload))
 
+    print(
+        f"provider ready: key={args.key} segment={mounted.segment_name} "
+        f"endpoint={mounted.transport_endpoint} bytes={len(payload)}"
+    )
     try:
-        print("[1/7] start")
-        engine.start("tcp://127.0.0.1:19001")
+      while True:
+          time.sleep(60)
+    except KeyboardInterrupt:
+      engine.stop()
 
-        use_cuda = os.getenv("NANO_USE_CUDA_BUFFER", "0") == "1"
-        device = nm.DeviceType.CUDA if use_cuda else nm.DeviceType.CPU
-        location = "cuda:0" if use_cuda else "cpu:0"
 
-        print(f"[2/7] register_buffer (device={device}, location={location})")
-        local = engine.register_buffer(addr, size, location, True, device)
-        print(f"  local.buffer_id={local.buffer_id}, size={size}")
+def run_consumer(args) -> None:
+    nm = _import_nm()
+    engine = nm.Engine()
+    host_buf = bytearray(args.buffer_size)
+    addr = ctypes.addressof(ctypes.c_char.from_buffer(host_buf))
 
-        print("[3/7] mount_segment")
-        mounted = engine.mount_segment("demo-segment", local.buffer_id)
-        print(
-            f"  mounted.segment_name={mounted.segment_name}, "
-            f"endpoint={mounted.transport_endpoint}"
+    engine.start(args.local_addr, args.master_addr, args.client_id)
+    local = engine.register_buffer(addr, len(host_buf), "cpu:0", True, nm.DeviceType.CPU)
+    obj = engine.get_object(args.key)
+    if obj is None:
+        raise RuntimeError(f"object {args.key} not found in mooncake_master")
+    batch = engine.read_object(args.key, local.buffer_id)
+    waited = engine.wait(batch.batch_id, 3000)
+    if _status_name(waited) != "COMPLETED":
+        raise RuntimeError(
+            f"read failed: state={_status_name(waited)} msg={waited.message}"
         )
+    data = bytes(host_buf[: obj.length]).decode("utf-8", errors="ignore")
+    print(
+        f"consumer fetched: key={args.key} segment={obj.segment_name} "
+        f"offset={obj.offset} length={obj.length} data={data}"
+    )
+    engine.stop()
 
-        print("[4/7] open_segment")
-        seg = engine.open_segment("demo-segment", mounted.transport_endpoint)
-        print(f"  segment_id={seg.segment_id}, name={seg.segment_name}")
 
-        print("[5/7] build remote ref")
-        remote = nm.RemoteBufferRef()
-        remote.segment = seg
-        remote.offset = 0
-        remote.length = size
+def main() -> None:
+    parser = argparse.ArgumentParser(description="nano-MoonCake three-process demo")
+    sub = parser.add_subparsers(dest="role", required=True)
 
-        print("[6/7] submit_write + poll/wait")
-        batch = engine.submit_write(local.buffer_id, remote)
-        polled = engine.poll(batch.batch_id)
-        waited = engine.wait(batch.batch_id, 1000)
-        print(
-            f"  poll={_status_name(polled)} bytes={polled.transferred_bytes}, "
-            f"wait={_status_name(waited)} bytes={waited.transferred_bytes}"
-        )
-        if _status_name(waited) != "COMPLETED":
-            raise RuntimeError(
-                f"batch not completed: state={_status_name(waited)} "
-                f"msg={waited.message} code={waited.error_code}"
-            )
+    provider = sub.add_parser("provider")
+    provider.add_argument("--local-addr", required=True)
+    provider.add_argument("--master-addr", required=True)
+    provider.add_argument("--client-id", required=True)
+    provider.add_argument("--segment-name", required=True)
+    provider.add_argument("--key", required=True)
+    provider.add_argument("--payload", default="hello-mooncake")
 
-        print("[7/7] stop")
-        engine.stop()
-        print(
-            "PASS: start/register/mount/open/submit/poll/wait/stop all succeeded."
-        )
+    consumer = sub.add_parser("consumer")
+    consumer.add_argument("--local-addr", required=True)
+    consumer.add_argument("--master-addr", required=True)
+    consumer.add_argument("--client-id", required=True)
+    consumer.add_argument("--key", required=True)
+    consumer.add_argument("--buffer-size", type=int, default=4096)
+
+    args = parser.parse_args()
+    try:
+        if args.role == "provider":
+            run_provider(args)
+        else:
+            run_consumer(args)
     except Exception:
-        print("FAIL: runtime error in demo flow")
+        print("FAIL: demo runtime error")
         print(traceback.format_exc())
-        try:
-            engine.stop()
-        except Exception:
-            pass
 
 
 if __name__ == "__main__":

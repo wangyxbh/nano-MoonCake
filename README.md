@@ -1,56 +1,63 @@
 # nano-MoonCake
 
-Minimal scaffold for a CUDA + TCP/RDMA learning project.
+Minimal scaffold for learning a Mooncake-like control plane + transfer engine split.
 
-## Directory Skeleton
+## Current Shape
 
-```text
-nano-MoonCake/
-  CMakeLists.txt
-  include/
-    nano_mooncake/
-      engine.h
-  csrc/
-    nano_mooncake/
-      engine.cpp
-    python/
-      bindings.cpp
-  python/
-    nano_mooncake/
-      __init__.py
-      client.py
-  examples/
-    tcp_cuda_demo.py
-```
+- `mooncake_master` is now a standalone control-plane process.
+- Each client process:
+  - starts a local transport endpoint
+  - registers and mounts local segments
+  - publishes segment metadata to `mooncake_master`
+  - publishes object metadata with `PutObject`
+  - queries object metadata with `GetObject`
+  - connects directly to the data owner for transfer
+- Data transfer stays peer-to-peer through `Transport` / `TcpTransportBackend`.
+- Control plane and data plane are both TCP-based in V1, but use separate protocols.
 
-## Phase-1 Goal
+## Core APIs
 
-- C++: implement `Engine::init/send/recv/close` with TCP first.
-- CUDA: add device buffer handling (start with copy-to-host strategy).
-- Python: expose stable API through pybind + thin wrapper.
+- `Engine.start(local_addr, master_addr, client_id)`
+- `register_buffer(...)`
+- `mount_segment(segment_name, buffer_id)`
+- `put_object(key, segment_name, offset, length)`
+- `get_object(key)`
+- `read_object(key, local_buffer_id)`
 
-## Current TCP Backend Notes
-
-- `Engine` now boots with a minimal `TcpTransportBackend` by default.
-- `Transport` is the reusable base class for shared transport state and submit
-  flow; `TcpTransportBackend` only implements TCP-specific lifecycle and I/O.
-- `start()` expects a TCP endpoint such as `tcp://127.0.0.1:9001`.
-- `register_buffer()` and `mount_segment()` are separate, matching Mooncake's
-  register-local-memory then mount-segment flow.
-- `open_segment()` takes a logical `segment_name` plus a peer transport endpoint.
-- The TCP backend serves mounted segments by name instead of exposing an
-  implicit "first buffer".
-- Remote metadata is resolved during `open_segment()`, so out-of-range requests
-  fail before submit.
-
-## Editable Install
+## Build
 
 ```bash
 pip install -e .
 ```
 
-After installation:
+The standalone master executable is built as `mooncake_master` when using CMake.
+
+## Three-Process Demo
+
+Start master:
 
 ```bash
-python examples/tcp_cuda_demo.py
+./build/mooncake_master tcp://127.0.0.1:19999
+```
+
+Start provider:
+
+```bash
+python examples/tcp_cuda_demo.py provider \
+  --local-addr tcp://127.0.0.1:19001 \
+  --master-addr tcp://127.0.0.1:19999 \
+  --client-id provider-1 \
+  --segment-name seg-a \
+  --key object-a \
+  --payload hello-mooncake
+```
+
+Start consumer:
+
+```bash
+python examples/tcp_cuda_demo.py consumer \
+  --local-addr tcp://127.0.0.1:19002 \
+  --master-addr tcp://127.0.0.1:19999 \
+  --client-id consumer-1 \
+  --key object-a
 ```

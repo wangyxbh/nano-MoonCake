@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 #include <string>
 
@@ -7,7 +8,6 @@
 namespace py = pybind11;
 
 PYBIND11_MODULE(_nano_mooncake, m) {
-
   py::enum_<nano_mooncake::DeviceType>(m, "DeviceType")
       .value("CPU", nano_mooncake::DeviceType::kCPU)
       .value("CUDA", nano_mooncake::DeviceType::kCUDA);
@@ -22,6 +22,34 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .value("COMPLETED", nano_mooncake::TransferState::kCompleted)
       .value("FAILED", nano_mooncake::TransferState::kFailed);
 
+  py::enum_<nano_mooncake::SegmentStatus>(m, "SegmentStatus")
+      .value("UNDEFINED", nano_mooncake::SegmentStatus::kUndefined)
+      .value("OK", nano_mooncake::SegmentStatus::kOk)
+      .value("UNMOUNTED", nano_mooncake::SegmentStatus::kUnmounted);
+
+  py::class_<nano_mooncake::ReplicaLocation>(m, "ReplicaLocation")
+      .def(py::init<>())
+      .def_readwrite("segment_name", &nano_mooncake::ReplicaLocation::segment_name)
+      .def_readwrite("transport_endpoint",
+                     &nano_mooncake::ReplicaLocation::transport_endpoint)
+      .def_readwrite("offset", &nano_mooncake::ReplicaLocation::offset)
+      .def_readwrite("length", &nano_mooncake::ReplicaLocation::length)
+      .def_readwrite("owner_client_id",
+                     &nano_mooncake::ReplicaLocation::owner_client_id);
+
+  py::class_<nano_mooncake::ObjectLocationRecord>(m, "ObjectLocationRecord")
+      .def(py::init<>())
+      .def_readwrite("key", &nano_mooncake::ObjectLocationRecord::key)
+      .def_readwrite("segment_name",
+                     &nano_mooncake::ObjectLocationRecord::segment_name)
+      .def_readwrite("transport_endpoint",
+                     &nano_mooncake::ObjectLocationRecord::transport_endpoint)
+      .def_readwrite("offset", &nano_mooncake::ObjectLocationRecord::offset)
+      .def_readwrite("length", &nano_mooncake::ObjectLocationRecord::length)
+      .def_readwrite("owner_client_id",
+                     &nano_mooncake::ObjectLocationRecord::owner_client_id)
+      .def_readwrite("replicas", &nano_mooncake::ObjectLocationRecord::replicas);
+
   py::class_<nano_mooncake::RemoteSegmentHandle>(m, "RemoteSegmentHandle")
       .def(py::init<>())
       .def_readwrite("segment_id", &nano_mooncake::RemoteSegmentHandle::segment_id)
@@ -30,7 +58,9 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def_readwrite("peer_endpoint",
                      &nano_mooncake::RemoteSegmentHandle::peer_endpoint)
       .def_readwrite("remote_base_addr",
-                     &nano_mooncake::RemoteSegmentHandle::remote_base_addr);
+                     &nano_mooncake::RemoteSegmentHandle::remote_base_addr)
+      .def_readwrite("remote_bytes",
+                     &nano_mooncake::RemoteSegmentHandle::remote_bytes);
 
   py::class_<nano_mooncake::RemoteBufferRef>(m, "RemoteBufferRef")
       .def(py::init<>())
@@ -54,6 +84,19 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def_readwrite("base_offset", &nano_mooncake::MountedSegment::base_offset)
       .def_readwrite("bytes", &nano_mooncake::MountedSegment::bytes);
 
+  py::class_<nano_mooncake::MasterSegmentRecord>(m, "MasterSegmentRecord")
+      .def(py::init<>())
+      .def_readwrite("segment_name",
+                     &nano_mooncake::MasterSegmentRecord::segment_name)
+      .def_readwrite("transport_endpoint",
+                     &nano_mooncake::MasterSegmentRecord::transport_endpoint)
+      .def_readwrite("base_offset",
+                     &nano_mooncake::MasterSegmentRecord::base_offset)
+      .def_readwrite("bytes", &nano_mooncake::MasterSegmentRecord::bytes)
+      .def_readwrite("status", &nano_mooncake::MasterSegmentRecord::status)
+      .def_readwrite("owner_client_id",
+                     &nano_mooncake::MasterSegmentRecord::owner_client_id);
+
   py::class_<nano_mooncake::BatchHandle>(m, "BatchHandle")
       .def(py::init<>())
       .def_readwrite("batch_id", &nano_mooncake::BatchHandle::batch_id)
@@ -69,8 +112,10 @@ PYBIND11_MODULE(_nano_mooncake, m) {
 
   py::class_<nano_mooncake::Engine>(m, "Engine")
       .def(py::init<>())
-      .def("start", &nano_mooncake::Engine::start, py::arg("local_addr"))
-      .def("init", &nano_mooncake::Engine::init, py::arg("local_addr"))
+      .def("start", &nano_mooncake::Engine::start, py::arg("local_addr"),
+           py::arg("master_addr"), py::arg("client_id"))
+      .def("init", &nano_mooncake::Engine::init, py::arg("local_addr"),
+           py::arg("master_addr"), py::arg("client_id"))
       .def(
           "register_buffer",
           [](nano_mooncake::Engine& self, std::uintptr_t addr, std::size_t bytes,
@@ -91,13 +136,20 @@ PYBIND11_MODULE(_nano_mooncake, m) {
            py::arg("transport_endpoint") = "")
       .def("unmount_segment", &nano_mooncake::Engine::unmount_segment,
            py::arg("segment_name"))
+      .def("resolve_segment", &nano_mooncake::Engine::resolve_segment,
+           py::arg("segment_name"))
+      .def("put_object", &nano_mooncake::Engine::put_object, py::arg("key"),
+           py::arg("segment_name"), py::arg("offset"), py::arg("length"))
+      .def("get_object", &nano_mooncake::Engine::get_object, py::arg("key"))
       .def("open_segment", &nano_mooncake::Engine::open_segment,
-           py::arg("segment_name"), py::arg("transport_endpoint") = "")
+           py::arg("segment_name"))
       .def("allocate_batch", &nano_mooncake::Engine::allocate_batch,
            py::arg("capacity"))
       .def("submit_write", &nano_mooncake::Engine::submit_write,
            py::arg("local_buffer_id"), py::arg("remote"))
       .def("submit_read", &nano_mooncake::Engine::submit_read, py::arg("remote"),
+           py::arg("local_buffer_id"))
+      .def("read_object", &nano_mooncake::Engine::read_object, py::arg("key"),
            py::arg("local_buffer_id"))
       .def("poll", &nano_mooncake::Engine::poll, py::arg("batch_id"))
       .def("wait", &nano_mooncake::Engine::wait, py::arg("batch_id"),

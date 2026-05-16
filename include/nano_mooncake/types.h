@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
+#include <vector>
 
 namespace nano_mooncake {
 
@@ -36,10 +37,42 @@ struct MountedSegment {
   std::size_t bytes = 0;
 };
 
+enum class SegmentStatus : uint8_t {
+  kUndefined = 0,
+  kOk = 1,
+  kUnmounted = 2,
+};
+
+struct MasterSegmentRecord {
+  std::string segment_name;
+  std::string transport_endpoint;
+  std::uint64_t base_offset = 0;
+  std::size_t bytes = 0;
+  SegmentStatus status = SegmentStatus::kOk;
+  std::string owner_client_id;
+};
+
+struct ReplicaLocation {
+  std::string segment_name;
+  std::string transport_endpoint;
+  std::uint64_t offset = 0;
+  std::size_t length = 0;
+  std::string owner_client_id;
+};
+
+struct ObjectLocationRecord {
+  std::string key;
+  std::string segment_name;
+  std::string transport_endpoint;
+  std::uint64_t offset = 0;
+  std::size_t length = 0;
+  std::string owner_client_id;
+  std::vector<ReplicaLocation> replicas;
+};
+
 struct RemoteSegmentHandle {
   SegmentId segment_id = 0;
   std::string segment_name;
-  // Resolved metadata for transport backend fast path.
   std::string peer_endpoint;
   std::uint64_t remote_base_addr = 0;
   std::size_t remote_bytes = 0;

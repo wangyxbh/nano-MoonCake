@@ -14,18 +14,31 @@ constexpr int kTimeoutError = 1;
 
 Engine::Engine() : transportbackend(std::make_unique<TcpTransportBackend>()) {}
 
-void Engine::start(const std::string& local_addr) { init(local_addr); }
+void Engine::start(const std::string& local_addr, const std::string& master_addr,
+                   const std::string& client_id) {
+  init(local_addr, master_addr, client_id);
+}
 
 void Engine::stop() { close(); }
 
-void Engine::init(const std::string& local_addr) {
+void Engine::init(const std::string& local_addr, const std::string& master_addr,
+                  const std::string& client_id) {
   if (local_addr.empty()) {
     throw std::invalid_argument("local_addr must not be empty");
+  }
+  if (master_addr.empty()) {
+    throw std::invalid_argument("master_addr must not be empty");
+  }
+  if (client_id.empty()) {
+    throw std::invalid_argument("client_id must not be empty");
   }
   if (transportbackend) {
     transportbackend->start(local_addr);
   }
   local_addr_ = local_addr;
+  master_addr_ = master_addr;
+  client_id_ = client_id;
+  master_client_ = std::make_unique<MasterClient>(master_addr_);
   initialized_ = true;
 }
 
@@ -40,7 +53,8 @@ RegisteredBuffer Engine::register_buffer(const BufferView& buffer,
   }
   for (const auto& [_, existing] : buffer_registry_) {
     if (check_overlap(buffer, existing.view)) {
-      throw std::invalid_argument("buffer overlaps with an existing registration");
+      throw std::invalid_argument(
+          "buffer overlaps with an existing registration");
     }
   }
   if (raw_addr_registry_.count(buffer.data) > 0) {
@@ -114,6 +128,14 @@ MountedSegment Engine::mount_segment(const std::string& segment_name,
   if (transportbackend) {
     transportbackend->add_local_segment(mounted);
   }
+  master_client_->MountSegment(MasterSegmentRecord{
+      .segment_name = mounted.segment_name,
+      .transport_endpoint = mounted.transport_endpoint,
+      .base_offset = mounted.base_offset,
+      .bytes = mounted.bytes,
+      .status = SegmentStatus::kOk,
+      .owner_client_id = client_id_,
+  });
   return mounted;
 }
 
@@ -128,31 +150,82 @@ void Engine::unmount_segment(const std::string& segment_name) {
   if (transportbackend) {
     transportbackend->remove_local_segment(segment_name);
   }
+  master_client_->UnmountSegment(segment_name);
   mounted_segments_.erase(it);
 }
 
-RemoteSegmentHandle Engine::open_segment(const std::string& segment_name,
-                                         const std::string& transport_endpoint) {
+std::optional<MasterSegmentRecord> Engine::resolve_segment(
+    const std::string& segment_name) {
+  if (!initialized_) {
+    throw std::runtime_error("Engine is not initialized");
+  }
+  return master_client_->ResolveSegment(segment_name);
+}
+
+void Engine::put_object(const std::string& key, const std::string& segment_name,
+                        std::uint64_t offset, std::size_t length) {
+  if (!initialized_) {
+    throw std::runtime_error("Engine is not initialized");
+  }
+  auto segment_it = mounted_segments_.find(segment_name);
+  if (segment_it == mounted_segments_.end()) {
+    throw std::invalid_argument("segment_name is not mounted locally");
+  }
+  if (length == 0) {
+    throw std::invalid_argument("object length must be greater than 0");
+  }
+  if (offset > segment_it->second.bytes ||
+      length > segment_it->second.bytes - offset) {
+    throw std::invalid_argument("object range exceeds mounted segment bounds");
+  }
+  ObjectLocationRecord object{
+      .key = key,
+      .segment_name = segment_name,
+      .transport_endpoint = segment_it->second.transport_endpoint,
+      .offset = offset,
+      .length = length,
+      .owner_client_id = client_id_,
+      .replicas =
+          {ReplicaLocation{
+              .segment_name = segment_name,
+              .transport_endpoint = segment_it->second.transport_endpoint,
+              .offset = offset,
+              .length = length,
+              .owner_client_id = client_id_,
+          }},
+  };
+  master_client_->PutObject(object);
+}
+
+std::optional<ObjectLocationRecord> Engine::get_object(const std::string& key) {
+  if (!initialized_) {
+    throw std::runtime_error("Engine is not initialized");
+  }
+  return master_client_->GetObject(key);
+}
+
+RemoteSegmentHandle Engine::open_segment(const std::string& segment_name) {
   if (!initialized_) {
     throw std::runtime_error("Engine is not initialized");
   }
   if (segment_name.empty()) {
     throw std::invalid_argument("segment_name must not be empty");
   }
-  const std::string endpoint =
-      transport_endpoint.empty() ? segment_name : transport_endpoint;
   if (auto it = segment_name_to_id_.find(segment_name);
       it != segment_name_to_id_.end()) {
     return segment_cache_.at(it->second);
   }
+  auto record = master_client_->ResolveSegment(segment_name);
+  if (!record.has_value()) {
+    throw std::invalid_argument("segment_name is not registered in master");
+  }
   RemoteSegmentHandle handle{
       .segment_id = next_segment_id_++,
-      .segment_name = segment_name,
-      .peer_endpoint = endpoint,
-      .remote_base_addr = 0,
-      .remote_bytes = 0,
+      .segment_name = record->segment_name,
+      .peer_endpoint = record->transport_endpoint,
+      .remote_base_addr = record->base_offset,
+      .remote_bytes = record->bytes,
   };
-  // Let the backend resolve remote metadata up front so submit() can stay simple.
   if (transportbackend) {
     transportbackend->prepare_segment(handle);
   }
@@ -224,6 +297,21 @@ BatchHandle Engine::submit_read(const RemoteBufferRef& remote,
   return submit_request(request);
 }
 
+BatchHandle Engine::read_object(const std::string& key,
+                                BufferId local_buffer_id) {
+  auto object = get_object(key);
+  if (!object.has_value()) {
+    throw std::invalid_argument("object key not found");
+  }
+  auto segment = open_segment(object->segment_name);
+  RemoteBufferRef remote{
+      .segment = segment,
+      .offset = object->offset,
+      .length = object->length,
+  };
+  return submit_read(remote, local_buffer_id);
+}
+
 TransferStatus Engine::poll(BatchId batch_id) {
   auto it = batch_table_.find(batch_id);
   if (it == batch_table_.end()) {
@@ -292,11 +380,14 @@ void Engine::close() {
   }
 
   batch_table_.clear();
+  master_client_.reset();
   if (transportbackend) {
     transportbackend->stop();
   }
   initialized_ = false;
   local_addr_.clear();
+  master_addr_.clear();
+  client_id_.clear();
 }
 
 bool Engine::check_overlap(const BufferView& lhs, const BufferView& rhs) const {
@@ -358,8 +449,6 @@ BatchHandle Engine::submit_request(const TransferRequest& request) {
   record.status = poll(handle.batch_id);
   return handle;
 }
-
-
 
 std::optional<TransferStatus> Engine::get_batch_status(BatchId batch_id) const {
   auto it = batch_table_.find(batch_id);
