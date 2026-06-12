@@ -2,7 +2,9 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <stdexcept>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace nano_mooncake {
@@ -11,6 +13,31 @@ enum class DeviceType : uint8_t {
   kCPU = 0,
   kCUDA = 1,
 };
+
+enum class TransportKind : uint8_t {
+  kTcp = 0,
+  kRdma = 1,
+};
+
+inline const char* TransportKindName(TransportKind kind) {
+  switch (kind) {
+    case TransportKind::kTcp:
+      return "tcp";
+    case TransportKind::kRdma:
+      return "rdma";
+  }
+  return "unknown";
+}
+
+inline TransportKind InferTransportKind(std::string_view endpoint) {
+  if (endpoint.rfind("tcp://", 0) == 0) {
+    return TransportKind::kTcp;
+  }
+  if (endpoint.rfind("rdma://", 0) == 0) {
+    return TransportKind::kRdma;
+  }
+  throw std::invalid_argument("unsupported transport endpoint scheme");
+}
 
 using BufferId = std::uint64_t;
 using SegmentId = std::uint64_t;
@@ -76,6 +103,7 @@ struct RemoteSegmentHandle {
   std::string peer_endpoint;
   std::uint64_t remote_base_addr = 0;
   std::size_t remote_bytes = 0;
+  std::uint32_t remote_key = 0;
 };
 
 struct RemoteBufferRef {

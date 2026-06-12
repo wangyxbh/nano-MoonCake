@@ -21,6 +21,7 @@ enum class MasterOpcode : uint8_t {
 
 struct MasterRequest {
   MasterOpcode opcode = MasterOpcode::kResolveSegment;
+  std::uint64_t trace_id = 0;
   std::string client_id;
   std::string segment_name;
   std::string object_key;

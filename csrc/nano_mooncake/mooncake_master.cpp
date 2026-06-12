@@ -1,5 +1,6 @@
 #include "nano_mooncake/mooncake_master.h"
 
+#include <algorithm>
 #include <stdexcept>
 
 namespace nano_mooncake {
@@ -35,6 +36,7 @@ void mooncake_master::UnmountSegment(const std::string& segment_name) {
     return;
   }
   it->second.status = SegmentStatus::kUnmounted;
+  RemoveSegmentObjectsLocked(segment_name);
 }
 
 std::optional<MasterSegmentRecord> mooncake_master::ResolveSegment(
@@ -103,6 +105,48 @@ std::vector<ObjectLocationRecord> mooncake_master::ListObjects() const {
     result.push_back(record);
   }
   return result;
+}
+
+void mooncake_master::RemoveSegmentObjectsLocked(
+    const std::string& segment_name) {
+  for (auto it = objects_.begin(); it != objects_.end();) {
+    auto& record = it->second;
+    record.replicas.erase(
+        std::remove_if(
+            record.replicas.begin(), record.replicas.end(),
+            [&](const ReplicaLocation& replica) {
+              return replica.segment_name == segment_name;
+            }),
+        record.replicas.end());
+
+    if (record.segment_name == segment_name) {
+      if (record.replicas.empty()) {
+        it = objects_.erase(it);
+        continue;
+      }
+      PromotePrimaryReplicaLocked(record);
+    } else if (record.replicas.empty()) {
+      // Keep object metadata internally consistent even if callers inserted a
+      // non-replicated record manually.
+      it = objects_.erase(it);
+      continue;
+    }
+
+    ++it;
+  }
+}
+
+void mooncake_master::PromotePrimaryReplicaLocked(ObjectLocationRecord& record) {
+  if (record.replicas.empty()) {
+    throw std::logic_error("cannot promote primary replica from empty list");
+  }
+
+  const auto& replica = record.replicas.front();
+  record.segment_name = replica.segment_name;
+  record.transport_endpoint = replica.transport_endpoint;
+  record.offset = replica.offset;
+  record.length = replica.length;
+  record.owner_client_id = replica.owner_client_id;
 }
 
 }  // namespace nano_mooncake

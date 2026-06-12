@@ -35,6 +35,7 @@ class Engine {
       const std::string& segment_name, BufferId buffer_id,
       const std::string& transport_endpoint = "");
   void unmount_segment(const std::string& segment_name);
+  void unsegment(const std::string& segment_name);
   std::optional<MasterSegmentRecord> resolve_segment(
       const std::string& segment_name);
 
@@ -63,6 +64,7 @@ class Engine {
     BatchHandle handle;
     std::vector<TransferRequest> requests;
     TransferStatus status;
+    std::uint64_t trace_id = 0;
   };
 
   std::string local_addr_;

@@ -36,6 +36,8 @@ class TcpTransportBackend : public Transport {
     std::uint16_t opcode = 0;
     std::uint16_t name_length = 0;
     std::uint16_t reserved = 0;
+    std::uint64_t trace_id = 0;
+    std::uint64_t request_id = 0;
     std::uint64_t offset = 0;
     std::uint64_t length = 0;
   };

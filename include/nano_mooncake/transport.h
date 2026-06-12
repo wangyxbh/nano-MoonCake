@@ -39,6 +39,10 @@ class Transport {
  protected:
   virtual void do_start(const std::string& local_endpoint) = 0;
   virtual void do_stop() = 0;
+  virtual void do_add_local_buffer(const RegisteredBuffer& buffer) {}
+  virtual void do_remove_local_buffer(const RegisteredBuffer& buffer) {}
+  virtual void do_add_local_segment(const MountedSegment& segment) {}
+  virtual void do_remove_local_segment(const MountedSegment& segment) {}
   virtual void do_prepare_segment(RemoteSegmentHandle& segment) {}
   virtual void do_submit_request(const ResolvedTransferRequest& request) = 0;
 

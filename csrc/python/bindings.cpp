@@ -60,7 +60,9 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def_readwrite("remote_base_addr",
                      &nano_mooncake::RemoteSegmentHandle::remote_base_addr)
       .def_readwrite("remote_bytes",
-                     &nano_mooncake::RemoteSegmentHandle::remote_bytes);
+                     &nano_mooncake::RemoteSegmentHandle::remote_bytes)
+      .def_readwrite("remote_key",
+                     &nano_mooncake::RemoteSegmentHandle::remote_key);
 
   py::class_<nano_mooncake::RemoteBufferRef>(m, "RemoteBufferRef")
       .def(py::init<>())
@@ -131,10 +133,14 @@ PYBIND11_MODULE(_nano_mooncake, m) {
           py::arg("addr"), py::arg("bytes"), py::arg("location") = "any",
           py::arg("remote_accessible") = true,
           py::arg("device") = nano_mooncake::DeviceType::kCPU)
+      .def("unregister_buffer", &nano_mooncake::Engine::unregister_buffer,
+           py::arg("buffer_id"))
       .def("mount_segment", &nano_mooncake::Engine::mount_segment,
            py::arg("segment_name"), py::arg("buffer_id"),
            py::arg("transport_endpoint") = "")
       .def("unmount_segment", &nano_mooncake::Engine::unmount_segment,
+           py::arg("segment_name"))
+      .def("unsegment", &nano_mooncake::Engine::unsegment,
            py::arg("segment_name"))
       .def("resolve_segment", &nano_mooncake::Engine::resolve_segment,
            py::arg("segment_name"))
@@ -143,6 +149,8 @@ PYBIND11_MODULE(_nano_mooncake, m) {
       .def("get_object", &nano_mooncake::Engine::get_object, py::arg("key"))
       .def("open_segment", &nano_mooncake::Engine::open_segment,
            py::arg("segment_name"))
+      .def("close_segment", &nano_mooncake::Engine::close_segment,
+           py::arg("segment_id"))
       .def("allocate_batch", &nano_mooncake::Engine::allocate_batch,
            py::arg("capacity"))
       .def("submit_write", &nano_mooncake::Engine::submit_write,

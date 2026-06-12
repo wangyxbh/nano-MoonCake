@@ -7,7 +7,33 @@
 #include <cstring>
 #include <stdexcept>
 
+#include "nano_mooncake/observability.h"
+
 namespace nano_mooncake {
+
+namespace {
+
+const char* MasterOpcodeName(MasterOpcode opcode) {
+  switch (opcode) {
+    case MasterOpcode::kMountSegment:
+      return "mount_segment";
+    case MasterOpcode::kUnmountSegment:
+      return "unmount_segment";
+    case MasterOpcode::kResolveSegment:
+      return "resolve_segment";
+    case MasterOpcode::kPutObject:
+      return "put_object";
+    case MasterOpcode::kGetObject:
+      return "get_object";
+    case MasterOpcode::kListSegments:
+      return "list_segments";
+    case MasterOpcode::kListObjects:
+      return "list_objects";
+  }
+  return "unknown";
+}
+
+}  // namespace
 
 MasterServer::~MasterServer() { Stop(); }
 
@@ -78,10 +104,60 @@ void MasterServer::AcceptLoop() {
 }
 
 void MasterServer::HandleClient(int client_fd) {
+  const auto total_start = TraceNow();
+  const auto read_start = TraceNow();
   auto payload = ReadFrame(client_fd);
+  const auto read_end = TraceNow();
+
+  const auto parse_start = TraceNow();
   auto request = ParseMasterRequest(payload);
+  const auto parse_end = TraceNow();
+
+  TraceContextScope trace_scope(request.trace_id);
+  LogTrace("master_server", "read_request",
+           TraceFields{
+               .bytes = payload.size(),
+               .duration_us = ElapsedUs(read_start, read_end),
+               .opcode = MasterOpcodeName(request.opcode),
+               .status = "ok",
+           });
+  LogTrace("master_server", "parse_request",
+           TraceFields{
+               .duration_us = ElapsedUs(parse_start, parse_end),
+               .opcode = MasterOpcodeName(request.opcode),
+               .status = "ok",
+           });
+
+  const auto dispatch_start = TraceNow();
   auto response = Dispatch(request);
-  WriteFrame(client_fd, SerializeMasterResponse(response));
+  const auto dispatch_end = TraceNow();
+  LogTrace("master_server", "dispatch",
+           TraceFields{
+               .duration_us = ElapsedUs(dispatch_start, dispatch_end),
+               .opcode = MasterOpcodeName(request.opcode),
+               .status = response.ok ? "ok" : "error",
+               .message = response.message,
+           });
+
+  auto response_payload = SerializeMasterResponse(response);
+  const auto write_start = TraceNow();
+  WriteFrame(client_fd, response_payload);
+  const auto write_end = TraceNow();
+  LogTrace("master_server", "write_response",
+           TraceFields{
+               .bytes = response_payload.size(),
+               .duration_us = ElapsedUs(write_start, write_end),
+               .opcode = MasterOpcodeName(request.opcode),
+               .status = "ok",
+           });
+  LogTrace("master_server", "handle_client",
+           TraceFields{
+               .bytes = payload.size() + response_payload.size(),
+               .duration_us = ElapsedUs(total_start, TraceNow()),
+               .opcode = MasterOpcodeName(request.opcode),
+               .status = response.ok ? "ok" : "error",
+               .message = response.message,
+           });
 }
 
 MasterResponse MasterServer::Dispatch(const MasterRequest& request) {

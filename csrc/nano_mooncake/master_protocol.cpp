@@ -277,6 +277,7 @@ std::string SerializeMasterRequest(const MasterRequest& request) {
   std::ostringstream oss;
   oss << "{"
       << "\"opcode\":\"" << static_cast<int>(request.opcode) << "\","
+      << "\"trace_id\":\"" << request.trace_id << "\","
       << "\"client_id\":\"" << JsonEscape(request.client_id) << "\","
       << "\"segment_name\":\"" << JsonEscape(request.segment_name) << "\","
       << "\"object_key\":\"" << JsonEscape(request.object_key) << "\","
@@ -292,6 +293,10 @@ MasterRequest ParseMasterRequest(const std::string& payload) {
   MasterRequest request;
   request.opcode = static_cast<MasterOpcode>(
       std::stoi(ExtractJsonString(payload, "opcode")));
+  const auto trace_id = ExtractJsonString(payload, "trace_id");
+  if (!trace_id.empty()) {
+    request.trace_id = static_cast<std::uint64_t>(std::stoull(trace_id));
+  }
   request.client_id = ExtractJsonString(payload, "client_id");
   request.segment_name = ExtractJsonString(payload, "segment_name");
   request.object_key = ExtractJsonString(payload, "object_key");

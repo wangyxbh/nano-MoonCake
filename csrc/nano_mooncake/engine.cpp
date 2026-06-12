@@ -4,15 +4,35 @@
 #include <stdexcept>
 #include <thread>
 
+#include "nano_mooncake/observability.h"
+#ifdef NANO_HAS_RDMA
+#include "nano_mooncake/rdma_transport.h"
+#endif
 #include "nano_mooncake/tcp_transport.h"
 
 namespace nano_mooncake {
 
 namespace {
 constexpr int kTimeoutError = 1;
+
+std::unique_ptr<TransportBackend> CreateTransportBackend(
+    const std::string& local_addr) {
+  switch (InferTransportKind(local_addr)) {
+    case TransportKind::kTcp:
+      return std::make_unique<TcpTransportBackend>();
+    case TransportKind::kRdma:
+#ifdef NANO_HAS_RDMA
+      return std::make_unique<RdmaTransportBackend>();
+#else
+      throw std::runtime_error(
+          "RDMA endpoint requested, but nano-MoonCake was built without RDMA support");
+#endif
+  }
+  throw std::invalid_argument("unsupported transport backend");
+}
 }
 
-Engine::Engine() : transportbackend(std::make_unique<TcpTransportBackend>()) {}
+Engine::Engine() = default;
 
 void Engine::start(const std::string& local_addr, const std::string& master_addr,
                    const std::string& client_id) {
@@ -32,6 +52,7 @@ void Engine::init(const std::string& local_addr, const std::string& master_addr,
   if (client_id.empty()) {
     throw std::invalid_argument("client_id must not be empty");
   }
+  transportbackend = CreateTransportBackend(local_addr);
   if (transportbackend) {
     transportbackend->start(local_addr);
   }
@@ -154,6 +175,33 @@ void Engine::unmount_segment(const std::string& segment_name) {
   mounted_segments_.erase(it);
 }
 
+void Engine::unsegment(const std::string& segment_name) {
+  if (!initialized_) {
+    throw std::runtime_error("Engine is not initialized");
+  }
+  if (segment_name.empty()) {
+    throw std::invalid_argument("segment_name must not be empty");
+  }
+
+  bool closed_remote = false;
+  if (auto it = segment_name_to_id_.find(segment_name);
+      it != segment_name_to_id_.end()) {
+    close_segment(it->second);
+    closed_remote = true;
+  }
+
+  bool unmounted_local = false;
+  if (mounted_segments_.find(segment_name) != mounted_segments_.end()) {
+    unmount_segment(segment_name);
+    unmounted_local = true;
+  }
+
+  if (!closed_remote && !unmounted_local) {
+    throw std::invalid_argument(
+        "segment_name is neither opened nor mounted locally");
+  }
+}
+
 std::optional<MasterSegmentRecord> Engine::resolve_segment(
     const std::string& segment_name) {
   if (!initialized_) {
@@ -164,6 +212,8 @@ std::optional<MasterSegmentRecord> Engine::resolve_segment(
 
 void Engine::put_object(const std::string& key, const std::string& segment_name,
                         std::uint64_t offset, std::size_t length) {
+  RootTraceScope root_trace;
+  const auto start = TraceNow();
   if (!initialized_) {
     throw std::runtime_error("Engine is not initialized");
   }
@@ -195,16 +245,38 @@ void Engine::put_object(const std::string& key, const std::string& segment_name,
           }},
   };
   master_client_->PutObject(object);
+  LogTrace("engine", "put_object",
+           TraceFields{
+               .bytes = length,
+               .offset = offset,
+               .duration_us = ElapsedUs(start, TraceNow()),
+               .segment_name = segment_name,
+               .object_key = key,
+               .status = "ok",
+           });
 }
 
 std::optional<ObjectLocationRecord> Engine::get_object(const std::string& key) {
+  RootTraceScope root_trace;
+  const auto start = TraceNow();
   if (!initialized_) {
     throw std::runtime_error("Engine is not initialized");
   }
-  return master_client_->GetObject(key);
+  auto object = master_client_->GetObject(key);
+  LogTrace("engine", "get_object",
+           TraceFields{
+               .bytes = object.has_value() ? object->length : 0,
+               .duration_us = ElapsedUs(start, TraceNow()),
+               .segment_name = object.has_value() ? object->segment_name : "",
+               .object_key = key,
+               .status = object.has_value() ? "ok" : "miss",
+           });
+  return object;
 }
 
 RemoteSegmentHandle Engine::open_segment(const std::string& segment_name) {
+  RootTraceScope root_trace;
+  const auto start = TraceNow();
   if (!initialized_) {
     throw std::runtime_error("Engine is not initialized");
   }
@@ -213,6 +285,15 @@ RemoteSegmentHandle Engine::open_segment(const std::string& segment_name) {
   }
   if (auto it = segment_name_to_id_.find(segment_name);
       it != segment_name_to_id_.end()) {
+    LogTrace("engine", "open_segment",
+             TraceFields{
+                 .segment_id = it->second,
+                 .duration_us = ElapsedUs(start, TraceNow()),
+                 .segment_name = segment_name,
+                 .status = "ok",
+                 .cache_hit = true,
+                 .has_cache_hit = true,
+             });
     return segment_cache_.at(it->second);
   }
   auto record = master_client_->ResolveSegment(segment_name);
@@ -231,6 +312,17 @@ RemoteSegmentHandle Engine::open_segment(const std::string& segment_name) {
   }
   segment_name_to_id_[segment_name] = handle.segment_id;
   segment_cache_[handle.segment_id] = handle;
+  LogTrace("engine", "open_segment",
+           TraceFields{
+               .segment_id = handle.segment_id,
+               .bytes = handle.remote_bytes,
+               .duration_us = ElapsedUs(start, TraceNow()),
+               .segment_name = handle.segment_name,
+               .endpoint = handle.peer_endpoint,
+               .status = "ok",
+               .cache_hit = false,
+               .has_cache_hit = true,
+           });
   return handle;
 }
 
@@ -267,6 +359,7 @@ BatchHandle Engine::allocate_batch(std::size_t capacity) {
               .message = "batch allocated",
               .error_code = 0,
           },
+      .trace_id = CurrentTraceId(),
   };
   record.requests.reserve(capacity);
   batch_table_.emplace(handle.batch_id, std::move(record));
@@ -299,6 +392,8 @@ BatchHandle Engine::submit_read(const RemoteBufferRef& remote,
 
 BatchHandle Engine::read_object(const std::string& key,
                                 BufferId local_buffer_id) {
+  RootTraceScope root_trace;
+  const auto start = TraceNow();
   auto object = get_object(key);
   if (!object.has_value()) {
     throw std::invalid_argument("object key not found");
@@ -309,7 +404,19 @@ BatchHandle Engine::read_object(const std::string& key,
       .offset = object->offset,
       .length = object->length,
   };
-  return submit_read(remote, local_buffer_id);
+  auto handle = submit_read(remote, local_buffer_id);
+  LogTrace("engine", "read_object",
+           TraceFields{
+               .batch_id = handle.batch_id,
+               .segment_id = segment.segment_id,
+               .offset = object->offset,
+               .bytes = object->length,
+               .duration_us = ElapsedUs(start, TraceNow()),
+               .segment_name = object->segment_name,
+               .object_key = key,
+               .status = "ok",
+           });
+  return handle;
 }
 
 TransferStatus Engine::poll(BatchId batch_id) {
@@ -324,11 +431,30 @@ TransferStatus Engine::poll(BatchId batch_id) {
 }
 
 TransferStatus Engine::wait(BatchId batch_id, int timeout_ms) {
+  RootTraceScope root_trace;
+  auto record_it = batch_table_.find(batch_id);
+  if (record_it == batch_table_.end()) {
+    throw std::invalid_argument("batch_id not found");
+  }
+  TraceContextScope trace_scope(record_it->second.trace_id);
   auto start = std::chrono::steady_clock::now();
   while (true) {
     auto status = poll(batch_id);
     if (status.state == TransferState::kCompleted ||
         status.state == TransferState::kFailed) {
+      LogTrace("engine", "wait_batch",
+               TraceFields{
+                   .batch_id = batch_id,
+                   .bytes = status.transferred_bytes,
+                   .duration_us = static_cast<std::uint64_t>(
+                       std::chrono::duration_cast<std::chrono::microseconds>(
+                           std::chrono::steady_clock::now() - start)
+                           .count()),
+                   .status = status.state == TransferState::kCompleted ? "ok"
+                                                                        : "error",
+                   .error_code = status.error_code,
+                   .message = status.message,
+               });
       return status;
     }
     if (timeout_ms >= 0) {
@@ -336,6 +462,15 @@ TransferStatus Engine::wait(BatchId batch_id, int timeout_ms) {
                          std::chrono::steady_clock::now() - start)
                          .count();
       if (elapsed > timeout_ms) {
+        LogTrace("engine", "wait_batch",
+                 TraceFields{
+                     .batch_id = batch_id,
+                     .bytes = status.transferred_bytes,
+                     .duration_us = static_cast<std::uint64_t>(elapsed) * 1000,
+                     .status = "timeout",
+                     .error_code = kTimeoutError,
+                     .message = "wait timeout",
+                 });
         return TransferStatus{
             .state = TransferState::kFailed,
             .transferred_bytes = status.transferred_bytes,
@@ -399,6 +534,8 @@ bool Engine::check_overlap(const BufferView& lhs, const BufferView& rhs) const {
 }
 
 BatchHandle Engine::submit_request(const TransferRequest& request) {
+  RootTraceScope root_trace;
+  const auto start = TraceNow();
   if (!initialized_) {
     throw std::runtime_error("Engine is not initialized");
   }
@@ -439,6 +576,7 @@ BatchHandle Engine::submit_request(const TransferRequest& request) {
 
   auto handle = allocate_batch(1);
   auto& record = batch_table_.at(handle.batch_id);
+  record.trace_id = CurrentTraceId();
   record.status.state = TransferState::kInFlight;
   record.status.message = "request submitted";
   record.requests.push_back(request);
@@ -447,6 +585,23 @@ BatchHandle Engine::submit_request(const TransferRequest& request) {
     transportbackend->submit(handle.batch_id, {resolved});
   }
   record.status = poll(handle.batch_id);
+  LogTrace("engine", "submit_request",
+           TraceFields{
+               .request_id = request.request_id,
+               .batch_id = handle.batch_id,
+               .segment_id = request.remote.segment.segment_id,
+               .offset = request.remote.offset,
+               .bytes = request.length,
+               .duration_us = ElapsedUs(start, TraceNow()),
+               .opcode = TransferOpcodeName(
+                   static_cast<std::uint8_t>(request.opcode)),
+               .segment_name = request.remote.segment.segment_name,
+               .endpoint = resolved.peer_endpoint,
+               .status =
+                   record.status.state == TransferState::kCompleted ? "ok" : "error",
+               .error_code = record.status.error_code,
+               .message = record.status.message,
+           });
   return handle;
 }
 

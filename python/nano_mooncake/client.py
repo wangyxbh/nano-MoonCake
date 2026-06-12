@@ -26,6 +26,9 @@ class NanoMooncakeClient:
             addr, bytes_len, location, remote_accessible, device
         )
 
+    def unregister_buffer(self, buffer_id: int):
+        return self._engine.unregister_buffer(buffer_id)
+
     def mount_segment(
         self, segment_name: str, buffer_id: int, transport_endpoint: str = ""
     ):
@@ -33,6 +36,9 @@ class NanoMooncakeClient:
 
     def unmount_segment(self, segment_name: str):
         return self._engine.unmount_segment(segment_name)
+
+    def unsegment(self, segment_name: str):
+        return self._engine.unsegment(segment_name)
 
     def resolve_segment(self, segment_name: str):
         return self._engine.resolve_segment(segment_name)
@@ -47,6 +53,9 @@ class NanoMooncakeClient:
 
     def open_segment(self, segment_name: str):
         return self._engine.open_segment(segment_name)
+
+    def close_segment(self, segment_id: int):
+        return self._engine.close_segment(segment_id)
 
     def submit_write(self, local_buffer_id: int, remote):
         return self._engine.submit_write(local_buffer_id, remote)

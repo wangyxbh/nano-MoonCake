@@ -3,6 +3,8 @@
 #include <cerrno>
 #include <stdexcept>
 
+#include "nano_mooncake/observability.h"
+
 namespace nano_mooncake {
 
 void Transport::start(const std::string& local_endpoint) {
@@ -34,23 +36,59 @@ void Transport::stop() {
 }
 
 void Transport::add_local_buffer(const RegisteredBuffer& buffer) {
-  std::lock_guard<std::mutex> lock(buffers_mu_);
-  local_buffers_[buffer.buffer_id] = buffer;
+  {
+    std::lock_guard<std::mutex> lock(buffers_mu_);
+    local_buffers_[buffer.buffer_id] = buffer;
+  }
+  try {
+    do_add_local_buffer(buffer);
+  } catch (...) {
+    std::lock_guard<std::mutex> lock(buffers_mu_);
+    local_buffers_.erase(buffer.buffer_id);
+    throw;
+  }
 }
 
 void Transport::remove_local_buffer(BufferId buffer_id) {
-  std::lock_guard<std::mutex> lock(buffers_mu_);
-  local_buffers_.erase(buffer_id);
+  RegisteredBuffer removed;
+  {
+    std::lock_guard<std::mutex> lock(buffers_mu_);
+    auto it = local_buffers_.find(buffer_id);
+    if (it == local_buffers_.end()) {
+      return;
+    }
+    removed = it->second;
+    local_buffers_.erase(it);
+  }
+  do_remove_local_buffer(removed);
 }
 
 void Transport::add_local_segment(const MountedSegment& segment) {
-  std::lock_guard<std::mutex> lock(segments_mu_);
-  local_segments_[segment.segment_name] = segment;
+  {
+    std::lock_guard<std::mutex> lock(segments_mu_);
+    local_segments_[segment.segment_name] = segment;
+  }
+  try {
+    do_add_local_segment(segment);
+  } catch (...) {
+    std::lock_guard<std::mutex> lock(segments_mu_);
+    local_segments_.erase(segment.segment_name);
+    throw;
+  }
 }
 
 void Transport::remove_local_segment(const std::string& segment_name) {
-  std::lock_guard<std::mutex> lock(segments_mu_);
-  local_segments_.erase(segment_name);
+  MountedSegment removed;
+  {
+    std::lock_guard<std::mutex> lock(segments_mu_);
+    auto it = local_segments_.find(segment_name);
+    if (it == local_segments_.end()) {
+      return;
+    }
+    removed = it->second;
+    local_segments_.erase(it);
+  }
+  do_remove_local_segment(removed);
 }
 
 void Transport::prepare_segment(RemoteSegmentHandle& segment) {
@@ -60,6 +98,7 @@ void Transport::prepare_segment(RemoteSegmentHandle& segment) {
 void Transport::submit(
     BatchId batch_id,
     const std::vector<ResolvedTransferRequest>& requests) {
+  const auto submit_start = TraceNow();
   set_batch_status(
       batch_id,
       TransferStatus{
@@ -83,6 +122,15 @@ void Transport::submit(
             .message = name() + " transfer completed",
             .error_code = 0,
         });
+    LogTrace("transport", "submit_batch",
+             TraceFields{
+                 .batch_id = batch_id,
+                 .bytes = transferred,
+                 .duration_us = ElapsedUs(submit_start, TraceNow()),
+                 .item_count = requests.size(),
+                 .status = "ok",
+                 .message = name(),
+             });
   } catch (const std::exception& ex) {
     set_batch_status(
         batch_id,
@@ -92,6 +140,15 @@ void Transport::submit(
             .message = ex.what(),
             .error_code = errno,
         });
+    LogTrace("transport", "submit_batch",
+             TraceFields{
+                 .batch_id = batch_id,
+                 .duration_us = ElapsedUs(submit_start, TraceNow()),
+                 .item_count = requests.size(),
+                 .error_code = errno,
+                 .status = "error",
+                 .message = ex.what(),
+             });
   }
 }
 

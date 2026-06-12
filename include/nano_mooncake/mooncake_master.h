@@ -23,6 +23,9 @@ class mooncake_master {
   std::vector<ObjectLocationRecord> ListObjects() const;
 
  private:
+  void RemoveSegmentObjectsLocked(const std::string& segment_name);
+  void PromotePrimaryReplicaLocked(ObjectLocationRecord& record);
+
   mutable std::mutex mu_;
   std::unordered_map<std::string, MasterSegmentRecord> segments_;
   std::unordered_map<std::string, ObjectLocationRecord> objects_;

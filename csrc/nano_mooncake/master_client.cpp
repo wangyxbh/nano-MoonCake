@@ -7,6 +7,8 @@
 #include <cstring>
 #include <stdexcept>
 
+#include "nano_mooncake/observability.h"
+
 namespace nano_mooncake {
 
 namespace {
@@ -98,6 +100,26 @@ std::string ReadFrame(int fd) {
   return payload;
 }
 
+const char* MasterOpcodeName(MasterOpcode opcode) {
+  switch (opcode) {
+    case MasterOpcode::kMountSegment:
+      return "mount_segment";
+    case MasterOpcode::kUnmountSegment:
+      return "unmount_segment";
+    case MasterOpcode::kResolveSegment:
+      return "resolve_segment";
+    case MasterOpcode::kPutObject:
+      return "put_object";
+    case MasterOpcode::kGetObject:
+      return "get_object";
+    case MasterOpcode::kListSegments:
+      return "list_segments";
+    case MasterOpcode::kListObjects:
+      return "list_objects";
+  }
+  return "unknown";
+}
+
 }  // namespace
 
 MasterClient::MasterClient(std::string master_endpoint)
@@ -182,15 +204,96 @@ std::vector<ObjectLocationRecord> MasterClient::ListObjects() {
 }
 
 MasterResponse MasterClient::RoundTrip(const MasterRequest& request) {
+  RootTraceScope root_trace;
+  MasterRequest traced_request = request;
+  traced_request.trace_id = EnsureTraceId();
+
+  const auto total_start = TraceNow();
+  const auto connect_start = TraceNow();
   int fd = Connect(master_endpoint_);
+  const auto connect_end = TraceNow();
+
+  LogTrace("master_client", "connect", TraceFields{
+                                            .duration_us =
+                                                ElapsedUs(connect_start, connect_end),
+                                            .opcode = MasterOpcodeName(request.opcode),
+                                            .endpoint = master_endpoint_,
+                                            .status = "ok",
+                                        });
   try {
-    WriteFrame(fd, SerializeMasterRequest(request));
-    auto payload = ReadFrame(fd);
+    const auto payload = SerializeMasterRequest(traced_request);
+    const auto write_start = TraceNow();
+    WriteFrame(fd, payload);
+    const auto write_end = TraceNow();
+    LogTrace("master_client", "write_request",
+             TraceFields{
+                 .bytes = payload.size(),
+                 .duration_us = ElapsedUs(write_start, write_end),
+                 .opcode = MasterOpcodeName(request.opcode),
+                 .endpoint = master_endpoint_,
+                 .status = "ok",
+             });
+
+    const auto read_start = TraceNow();
+    auto response_payload = ReadFrame(fd);
+    const auto read_end = TraceNow();
+    LogTrace("master_client", "read_response",
+             TraceFields{
+                 .bytes = response_payload.size(),
+                 .duration_us = ElapsedUs(read_start, read_end),
+                 .opcode = MasterOpcodeName(request.opcode),
+                 .endpoint = master_endpoint_,
+                 .status = "ok",
+             });
+
+    const auto parse_start = TraceNow();
+    auto response = ParseMasterResponse(response_payload);
+    const auto parse_end = TraceNow();
+    LogTrace("master_client", "parse_response",
+             TraceFields{
+                 .duration_us = ElapsedUs(parse_start, parse_end),
+                 .opcode = MasterOpcodeName(request.opcode),
+                 .endpoint = master_endpoint_,
+                 .status = "ok",
+             });
+
     ::close(fd);
-    return ParseMasterResponse(payload);
+    LogTrace("master_client", "round_trip",
+             TraceFields{
+                 .bytes = payload.size() + response_payload.size(),
+                 .duration_us = ElapsedUs(total_start, TraceNow()),
+                 .opcode = MasterOpcodeName(request.opcode),
+                 .endpoint = master_endpoint_,
+                 .status = response.ok ? "ok" : "error",
+                 .message = response.message,
+             });
+    return response;
   } catch (...) {
+    const auto total_end = TraceNow();
     ::close(fd);
-    throw;
+    try {
+      throw;
+    } catch (const std::exception& ex) {
+      LogTrace("master_client", "round_trip",
+               TraceFields{
+                   .duration_us = ElapsedUs(total_start, total_end),
+                   .opcode = MasterOpcodeName(request.opcode),
+                   .endpoint = master_endpoint_,
+                   .status = "error",
+                   .message = ex.what(),
+               });
+      throw;
+    } catch (...) {
+      LogTrace("master_client", "round_trip",
+               TraceFields{
+                   .duration_us = ElapsedUs(total_start, total_end),
+                   .opcode = MasterOpcodeName(request.opcode),
+                   .endpoint = master_endpoint_,
+                   .status = "error",
+                   .message = "unknown exception",
+               });
+      throw;
+    }
   }
 }
 
